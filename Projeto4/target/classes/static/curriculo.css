@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.topo {
+    background-color: #1e293b;
+    /*background-color: #434040;*/
+    color: white;
+}
+
+.topo img {
+    border: 3px solid transparent;
+    border-radius: 200px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.perfil {
+    text-align: center;
+    float: initial;
+}
+/*Hummns*/
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.panel {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.p1 {
+    background-color: #f8fafc;
+    flex: 3;
+}
+
+.p2 {
+    flex: 7;
+}
+
+@media (max-width: 768px) { /*Extrazinho massa*/
+    .container {
+        flex-direction: column; /* Transforma as colunas em linhas (uma em cima da outra) */
+    }
+
+    .p1, .p2 {
+        flex: 1 1 100%; /* Faz com que ambas ocupem 100% da largura da tela */
+        width: 100%;
+    }
+
+    .perfil img {
+        width: 120px; /* Reduz um pouco a foto em telas menores */
+    }
+}
