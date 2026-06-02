@@ -1,0 +1,15 @@
+.atv9 {
+    background-color: black;
+    color: white;
+    /*Visual?*/
+}
+
+.atv9 button {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+.atv9 button:hover {
+    background-color: #434040;
+}

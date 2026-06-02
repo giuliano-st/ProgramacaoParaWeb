@@ -1,0 +1,61 @@
+#face {
+    color: black;
+    padding: 5px;
+    font-style: italic;
+}
+
+#orkut {
+    color: purple;
+    padding: 5px;
+    font-style: oblique;
+}
+
+button {
+    background-color: darkorange;
+    border: 2px solid black;
+    border-radius: 12px;
+}
+
+table {
+    font-family: "Arial Black", sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: purple;
+    text-align: center;
+}
+
+td {
+    padding: 25px;
+}
+
+tr:hover {
+    background-color: chartreuse;
+}
+
+.container {
+    display: flex;
+}
+
+.secundario {
+    font-family: "Century Gothic";
+}
+
+.destaque {
+    color: coral;
+}
+
+h2 {
+    color: brown;
+    text-align: center;
+}
+
+#experiencia {
+    background-color: crimson;
+}
+
+.habilidades li {
+    color: aquamarine;
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" , lang="pt-br" , name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividades CSS</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="atv1">
+    <h1 id="topo">Atividade 1</h1>
+    <h2>Subtitulo</h2>
+    <table style="width:100%; border-collapse: collapse;" border="1">
+        <tr>
+            <th>Habilidade</th>
+            <th>Nível</th>
+            <th id="experiencia">Experiência (anos)</th>
+        </tr>
+        <tr>
+            <td>HTML</td>
+            <td>Intermediario</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>CSS</td>
+            <td>Iniciante</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Javascript</td>
+            <td>Básico</td>
+            <td>1</td>
+        </tr>
+    </table>
+    <p class="descricao">Exemplo de texto para descrição</p>
+    <h2>Habilidades</h2>
+    <ul class="habilidades">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+</div>
+<hr>
+<div class="atv2 corpo">
+    <h1>Atividade 2</h1>
+    <div class="secao">
+        <p>Seção de texto para testes</p>
+        <p id="secao">Seção de texto para testes com ID</p>
+    </div>
+</div>
+</body>
+<hr>
+<div class="atv3">
+    <h1>Atividade 3</h1>
+    <div class="back1">
+        <br>
+        <br>
+        <br>
+    </div>
+    <div class="back2">
+        <br>
+        <br>
+        <br>
+    </div>
+    <div class="back3">
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+<hr>
+<div class="atv4">
+    <h1>Atividade 4 - Border</h1>
+    <div class="sec1">
+        <p>Seção com uma borda</p>
+    </div>
+    <div class="sec2">
+        <p>Seção com outra borda</p>
+    </div>
+    <div class="sec3">
+        <p>Seção com mais uma borda</p>
+    </div>
+</div>
+<hr>
+<div class="atv5">
+    <h1>Atividade 5 - Espaçamento</h1>
+    <div class="sec4">
+        <p>Seção com um espaçamento</p>
+    </div>
+    <div class="sec5">
+        <p>Seção com outro espaçamento</p>
+    </div>
+    <div class="sec6">
+        <p>Seção com mais um espaçamento</p>
+    </div>
+</div>
+<hr>
+<div class="atv6">
+    <h1>Atividade 6 - Posicionamento</h1>
+    <div class="elemento1">
+        <p>Elemento 1 - Posição Relativa</p>
+    </div>
+    <div class="elemento2">
+        <p>Elemento 2 - Posição Absoluta</p>
+    </div>
+    <div class="elemento3">
+        <p>Elemento 3 - Posição "Sticky"</p>
+        <p>Cabeçalho</p>
+    </div>
+    <p><img src="cat.jpg">Texto ao lado</p>
+</div>
+<hr>
+<a class="topo" href="#topo">Voltar ao topo</a>
+<div class="atv7">
+    <h1>Atividade 7 - Tabelas</h1>
+    <div class="table-container">
+        <table>
+            <caption>Lista de Funcionários</caption>
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Curso</th>
+                <th>Semestre</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>João</td>
+                <td>Odontologia</td>
+                <td>2º</td>
+            </tr>
+            <tr>
+                <td>Ana</td>
+                <td>Design</td>
+                <td>4º</td>
+            </tr>
+            <tr>
+                <td>Marcos</td>
+                <td>Arquitetura</td>
+                <td>1º</td>
+            </tr>
+            <tr>
+                <td>Sofia</td>
+                <td>Terapia Ocupacional</td>
+                <td>5º</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+<div class="atv8">
+    <div>
+        <h3>Formulário de Contato</h3>
+        <form>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+
+            <input type="email" id="email" name="email" placeholder="Digite seu email">
+
+            <label for="area">Área de Atuação:</label>
+            <select id="area" name="area">
+                <option>Ciências</option>
+                <option>Saúde</option>
+                <option>Engenharias</option>
+                <option>Agrárias</option>
+                <option>Contabéis</option>
+            </select>
+
+            <label for="comentario">Comentários:</label>
+            <textarea id="comentario" name="comentario" placeholder="Insira seu comentário"></textarea>
+
+            <input type="text" id="pesquisa" placeholder="Pesquisar...">
+
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+</div>
+<hr>
+<div class="atv9">
+    <link id="theme" rel="stylesheet" href="estilo-light.css">
+    <div>
+        <h1>Atividade 9 - Temas</h1>
+        <p>Informações sobre a página.......</p>
+        <button onclick="changeStyle('estilo-light.css')">🌞 Modo Claro</button>
+        <button onclick="changeStyle('estilo-dark.css')">🌙 Modo Escuro</button>
+
+        <script>
+            function changeStyle(sheet) {
+                document.getElementById('theme').href = sheet;
+            }
+        </script>
+    </div>
+</div>
+</html>

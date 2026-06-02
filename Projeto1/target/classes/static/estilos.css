@@ -1,0 +1,59 @@
+.lnk {
+    color: white;
+    padding: 10px;
+    font-style: italic;
+}
+
+.btn {
+    background: azure;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: crosshair;
+}
+
+.tabela th {
+    background: lightgray;
+    font-family: "Arial Black";
+}
+
+.tabela tr:hover {
+    background-color: #f5f5f5;
+}
+
+.cnt1 {
+    width: 33%;
+    float: left;
+}
+
+.cnt2 {
+    width: 33%;
+    display: inline-block;
+}
+
+.cnt3 {
+    display: flex;
+    width: 33%;
+}
+
+.cnt4 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 33%;
+}
+
+.scn {
+    color: gold;
+}
+
+.destaque {
+    background-color: aquamarine;
+}
+
+.frm {
+    display: block;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    width: 40%;
+}

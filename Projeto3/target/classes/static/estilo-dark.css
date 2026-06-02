@@ -1,0 +1,43 @@
+.topo {
+    background-color: #0f172a;
+    color: #f1f5f9;
+    padding-bottom: 10px;
+}
+
+button {
+    background-color: #0f172a;
+}
+
+button:hover {
+    background-color: #27365e;
+}
+
+.p1 {
+    background-color: #1e293b;
+    color: #e2e8f0;
+}
+
+.p2 {
+    background-color: #334155;
+    color: #f8fafc;
+}
+
+.fundo {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
+
+.formulario {
+    color: white;
+    background-color: #334155;
+}
+
+form {
+    background-color: #243959;
+    color: white;
+}
+
+input[type=submit] {
+    background-color: #4c5c74;
+    color: white;
+}

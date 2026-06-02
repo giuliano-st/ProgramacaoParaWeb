@@ -1,0 +1,32 @@
+.topo {
+    background-color: #1e293b;
+    color: white;
+    padding-bottom: 10px;
+}
+
+button {
+    background-color: #334155;
+}
+
+button:hover {
+    background-color: #4c5c74;
+}
+
+.p1 {
+    background-color: #f8fafc;
+    color: black;
+}
+
+.p2 {
+    background-color: white;
+    color: black;
+}
+
+.fundo {
+    background-color: #1e293b;
+    color: white;
+}
+
+form {
+    background-color: #f2f2f2;
+}

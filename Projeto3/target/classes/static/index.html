@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" , lang="pt-br" , content="width=device-width, initial-scale=1.0">
+    <title>Currículo</title>
+    <link rel="stylesheet" href="curriculo.css">
+    <link id="theme" rel="stylesheet" href="estilo-light.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></head>
+<body>
+<div class="topo">
+    <button onclick="changeStyle('estilo-light.css')">🌞</button>
+    <button onclick="changeStyle('estilo-dark.css')">🌙</button>
+    <div class="perfil">
+        <img title="Foto que eu achei na internet :)" alt="Foto de perfil" src="foto.jpg">
+        <h1>Giuliano Sallin Trevisan</h1>
+        <h2>Suporte de TI / Estudante</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="panel p1">
+        <div class="educacao">
+            <h1>Educação</h1>
+            <hr>
+            <ul class="lista">
+                <li>Tecnico em Informatica - Politécnico da UFSM</li>
+                <li>Sistemas de Informação - UFN</li>
+            </ul>
+        </div>
+        <div class="lista">
+            <h1>Habilidades</h1>
+            <hr>
+            <ul style="padding-left: 30px">
+                <li>Programação</li>
+                <li>Documentação</li>
+                <li>Analise</li>
+                <li id="habilidadeOculta" style="display: none">Nenhuma (╥﹏╥)(</li>
+            </ul>
+            <button id="btnHabilidade">Mostrar habilidade oculta</button>
+        </div>
+        <div>
+            <h1>Contato</h1>
+            <hr>
+            <ul class="lista">
+                <li>E-mail: giuliano.strevisan@ufn.edu.br</li>
+                <li>Tel: (055) 55 99988-7700</li>
+                <li>End: R. Silva Jardim, 1175 - Nossa Sra. do Rosario, Santa Maria, 97010-491</li>
+                <a href="formulario.html">Formulário</a>
+                <a href="tabela.html">Tabela</a>
+            </ul>
+        </div>
+    </div>
+    <div class="panel p2">
+        <div class="bio">
+            <h1>Biografia</h1>
+            <hr>
+            <p>Natural de Santa Maria no Rio Grande do Sul, estudante do curso de sistemas de informação, atualmente no 5º
+                Semestre.</p>
+        </div>
+        <div>
+            <h1>Experiência</h1>
+            <hr>
+            <h3>Estágiario de Técnico em Informatica</h3>
+            <p>Desvio de função e manutenção de computadores</p>
+            <h3>Suporte de TI</h3>
+            <p>Suporte ao usuário de TI</p>
+        </div>
+    </div>
+</div>
+<hr>
+<script src="script.js"></script>
+</body>
+<footer>
+    <div class="fundo">
+        <ul class="social">
+            <li><a href="http://github.com/"><img src="github.png"></a></li>
+            <li><a href="https://www.facebook.com/"><img src="facebook.png"></a></li>
+            <li><a href="https://www.reddit.com/"><img src="reddit.png"></a></li>
+        </ul>
+    </div>
+</footer>

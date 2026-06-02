@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Roboto Condensed", sans-serif;
+}
+/*Header mais ou menos*/
+.topo {
+    background-color: #1e293b;
+    color: white;
+}
+
+.topo img {
+    border: 3px solid transparent;
+    border-radius: 200px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+button {
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 10px;
+    width: 70px;
+}
+
+.perfil {
+    text-align: center;
+    float: initial;
+    padding-bottom: 10px;
+}
+/*Corpo dividido*/
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.panel {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.p1 {
+    background-color: #f8fafc;
+    flex: 3;
+}
+
+.p2 {
+    flex: 7;
+}
+
+.lista {
+    list-style: none;
+}
+/*Rodapé*/
+.fundo {
+    background-color: #1e293b;
+    color: white;
+}
+
+.social {
+    display: inline-flex;
+    list-style: none;
+}
+
+.social li img {
+    width: 50px;
+    padding: 10px;
+}
+
+/*Outra página*/
+
+.home {
+    position: fixed;
+    padding-bottom: 100px;
+    bottom: 0;
+}
+
+.formulario {
+    text-align: center;
+    padding: 185px;
+}
+form {
+    max-width: 500px; /*Define o tamanho maximo que o formulário terá*/
+    margin: auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+input[type=text],
+input[type=email],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+textarea:focus {
+    border: 2px solid #243959;
+    background-color: #e8f4f5;
+    outline: none;
+}
+
+input[type=submit] {
+    background-color: #192f6c;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #455aa0;
+}
+
+#pesquisa {
+    width: 100px;
+    transition: width 0.4s ease-in-out;
+}
+
+#pesquisa:focus {
+    width: 250px;
+}
+
+/*Tabela*/
+table {
+    font-family: "Arial Black", sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    height: 80vh;
+}
+
+th {
+    background-color: purple;
+    text-align: center;
+}
+
+td {
+    padding: 25px;
+}
+
+tr:hover {
+    background-color: chartreuse;
+}
+
+
+/*A surprise tool that will help us later*/
+@media (max-width: 768px) { /*Extrazinho massa*/
+    .container {
+        flex-direction: column; /* Transforma as colunas em linhas (uma em cima da outra) */
+    }
+
+    .p1, .p2 {
+        flex: 1 1 100%; /* Faz com que ambas ocupem 100% da largura da tela */
+        width: 100%;
+    }
+
+    .perfil img {
+        width: 120px; /* Reduz um pouco a foto em telas menores */
+    }
+}

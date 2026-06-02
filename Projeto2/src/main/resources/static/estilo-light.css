@@ -1,0 +1,9 @@
+.atv9 {
+    background-color: white;
+    color: black;
+    /*Visual?*/
+}
+
+.atv9 button:hover {
+    background-color: #c3bfbf;
+}
