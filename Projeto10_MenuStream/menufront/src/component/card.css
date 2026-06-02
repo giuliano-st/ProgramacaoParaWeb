@@ -1,0 +1,72 @@
+.cartao {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eeeeee;
+}
+
+.cartao:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.cartao img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.cartao:hover img {
+    transform: scale(1.03);
+}
+
+.cartao-conteudo {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.cartao-conteudo h2 {
+    font-size: 1.3rem;
+    color: #222;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+}
+
+.cartao-conteudo p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 0 0 12px 0;
+}
+
+.cartao-conteudo p:nth-of-type(2) {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    margin-bottom: auto;
+}
+
+/* Destacando o preço estilo cardápio */
+.cartao-conteudo p:nth-of-type(3) {
+    font-size: 1.4rem;
+    color: #2b9348; /* Verde agradável para valor */
+    font-weight: 700;
+    margin: 12px 0 8px 0;
+}
+
+/* Estilização do Status (Disponível / Indisponível) */
+.cartao-conteudo p:last-child {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+}
