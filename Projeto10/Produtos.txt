@@ -1,0 +1,95 @@
+Produtos:
+{
+    "nome": "Clássico Bacon",
+    "descricao": "Pão brioche, hambúrguer 180g, queijo cheddar, bacon crocante e maionese especial.",
+    "preco": 29.90,
+    "categoria": "Hambúrguer",
+    "disponibilidade": true,
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNMEyVsK2Sb0hq8ZJDPBRQkKzwZ2lICuPAqw&s"
+}
+{
+    "nome": "Duplo Queijo",
+    "descricao": "Hambúrguer com queijo cheddar duplo, picles e molho especial.",
+    "preco": 32.90,
+    "categoria": "Hambúrguer",
+    "disponibilidade": true,
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNMEyVsK2Sb0hq8ZJDPBRQkKzwZ2lICuPAqw&s"
+}
+{
+    "nome": "Frango Especial",
+    "descricao": "Peito de frango grelhado, alface, tomate e molho ranch.",
+    "preco": 27.50,
+    "categoria": "Hambúrguer",
+    "disponibilidade": true,
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNMEyVsK2Sb0hq8ZJDPBRQkKzwZ2lICuPAqw&s"
+}
+{
+    "nome": "Vegetariano",
+    "descricao": "Hambúrguer artesanal de grão-de-bico, quinoa, alface, tomate e molho da casa.",
+    "preco": 26.90,
+    "categoria": "Hambúrguer",
+    "disponibilidade": true,
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNMEyVsK2Sb0hq8ZJDPBRQkKzwZ2lICuPAqw&s"
+}
+
+Clientes:
+{
+    "nome": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "enderecoEntrega": "Rua Maple, 1234, Springfield, IL",
+    "preferenciaPagamento": "Cartão de Crédito"
+}
+{
+    "nome": "Bob Smith",
+    "email": "bob.smith@example.com",
+    "enderecoEntrega": "Rua Oak, 5678, Springfield, IL",
+    "preferenciaPagamento": "Cartão de Débito"
+}
+{
+    "nome": "Carol White",
+    "email": "carol.white@example.com",
+    "enderecoEntrega": "Rua Pine, 91011, Springfield, IL",
+    "preferenciaPagamento": "Dinheiro"
+}
+{
+    "nome": "David Brown",
+    "email": "david.brown@example.com",
+    "enderecoEntrega": "Rua Elm, 1213, Springfield, IL",
+    "preferenciaPagamento": "PayPal"
+}
+
+Pedidos:
+{
+    "clienteId": 1,
+    "itensPedido": [
+        {
+            "produtoId": 1,
+            "quantidade": 2
+        },
+        {
+            "produtoId": 3,
+            "quantidade": 1
+        }
+    ],
+    "valorTotal": 96.03,
+    "status": "concluido",
+    "dataPedido": "2024-04-01T12:30:00Z",
+    "dataEntrega": "2024-04-01T15:00:00Z"
+}
+{
+    "clienteId": 2,
+    "itensPedido": [
+        {
+            "produtoId": 2,
+            "quantidade": 1
+        },
+        {
+            "produtoId": 4,
+            "quantidade": 3
+        }
+    ],
+    "valorTotal": 124.96,
+    "status": "em andamento",
+    "dataPedido": "2024-04-02T13:00:00Z",
+    "dataEntrega": null
+}
