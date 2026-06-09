@@ -1,7 +1,10 @@
 package com.herysson.menubackend.controller;
 
-import com.herysson.menubackend.model.Produto;
+import com.herysson.menubackend.dto.ProdutoDTORequest;
+import com.herysson.menubackend.dto.ProdutoDTOResponse;
 import com.herysson.menubackend.repository.ProdutoRepository;
+import com.herysson.menubackend.service.ProdutoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,35 +14,35 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ProdutoController {
 
-    private final ProdutoRepository repository;
+    private final ProdutoService produtoService;
 
-    public ProdutoController(ProdutoRepository repository) {
-        this.repository = repository;
-    }
-
-    @GetMapping
-    public List<Produto> listarTodos() {
-        return repository.findAll();
+    public ProdutoController(ProdutoService produtoService) {
+        this.produtoService = produtoService;
     }
 
     @PostMapping
-    public Produto criar(@RequestBody Produto produto) {
-        return repository.save(produto);
+    public ResponseEntity<ProdutoDTOResponse> salvar(@RequestBody ProdutoDTORequest produtoDTO) {
+        return ResponseEntity.ok(produtoService.salvar(produtoDTO));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProdutoDTOResponse>> listar() {
+        return ResponseEntity.ok(produtoService.listar());
     }
 
     @GetMapping("/{id}")
-    public Produto buscarPorId(@PathVariable Long id) {
-        return repository.findById(id).orElseThrow();
+    public ResponseEntity<ProdutoDTOResponse> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(produtoService.buscarPorId(id));
     }
 
     @PutMapping("/{id}")
-    public Produto atualizar(@PathVariable Long id, @RequestBody Produto produto) {
-        produto.setId(id);
-        return repository.save(produto);
+    public ResponseEntity<ProdutoDTOResponse> atualizar(@PathVariable Long id, @RequestBody ProdutoDTORequest produtoDTO) {
+        return ResponseEntity.ok(produtoService.atualizar(id, produtoDTO));
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
-        repository.deleteById(id);
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        produtoService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }

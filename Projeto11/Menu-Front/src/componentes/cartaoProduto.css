@@ -64,11 +64,11 @@
 
 /* Cores dos botões combinando com as ações */
 .btn-editar {
-    background-color: #ff9800;
+    background-color: #0051ff;
     color: white;
 }
 .btn-editar:hover {
-    background-color: #e65100;
+    background-color: #0026e6;
 }
 
 .btn-desabilitar {
