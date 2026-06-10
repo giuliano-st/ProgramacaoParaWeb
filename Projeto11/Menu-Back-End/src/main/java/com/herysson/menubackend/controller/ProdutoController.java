@@ -2,7 +2,6 @@ package com.herysson.menubackend.controller;
 
 import com.herysson.menubackend.dto.ProdutoDTORequest;
 import com.herysson.menubackend.dto.ProdutoDTOResponse;
-import com.herysson.menubackend.repository.ProdutoRepository;
 import com.herysson.menubackend.service.ProdutoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
