@@ -11,13 +11,13 @@ import java.util.List;
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "clienteId")
     private Cliente clienteId;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedidoId", cascade = CascadeType.ALL)
     private List<ItemPedido> itensPedido;
 
     private Double valorTotal;

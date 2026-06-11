@@ -1,6 +1,5 @@
 package com.herysson.menubackend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,13 +11,12 @@ public class ItemPedido {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    @JsonIgnore
-    private Pedido pedido;
+    @JoinColumn(name = "pedidoId")
+    private Pedido pedidoId;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private Produto produto;
+    @JoinColumn(name = "produtoId")
+    private Produto produtoId;
 
     private int quantidade;
 }
