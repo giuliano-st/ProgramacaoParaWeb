@@ -92,7 +92,7 @@ const Menu = () => {
             <Navbar onNovoProduto={abrirCadastro} />
 
             <main className="container">
-                <h1>Lista de Produtos</h1>
+                <h1>Cardápio</h1>
 
                 {modalAberto && (
                     <div className="overlay">
