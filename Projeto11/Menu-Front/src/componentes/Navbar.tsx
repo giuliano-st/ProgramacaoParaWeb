@@ -1,9 +1,7 @@
 import "./Navbar.css";
-interface NavbarProps {
-    onNovoProduto: () => void;
-}
 
-export function Navbar({ onNovoProduto }: NavbarProps) {
+
+export function Navbar() {
     return (
         <nav className="navbar">
             <div className="navbar-logo">
@@ -12,14 +10,6 @@ export function Navbar({ onNovoProduto }: NavbarProps) {
             </div>
             <ul className="navbar-links">
                 <li>
-                    <button className="btn-nav btn-cadastrar" onClick={onNovoProduto}>
-                        Login
-                    </button>
-                </li>
-                <li>
-                    <button className="btn-nav btn-cadastrar" onClick={onNovoProduto}>
-                        Novo Produto
-                    </button>
                 </li>
             </ul>
         </nav>

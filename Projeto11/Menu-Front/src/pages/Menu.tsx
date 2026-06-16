@@ -6,6 +6,7 @@ import {useProdutoAtualizar} from "../hooks/useProdutoEditar.ts";
 import {Navbar} from "../componentes/Navbar.tsx";
 import {FormularioProduto} from "../componentes/FormularioProduto.tsx";
 import {CartaoProduto} from "../componentes/CartaoProduto.tsx";
+import "./Menu.css";
 
 const Menu = () => {
     const { data } = useProdutoDados();
@@ -163,6 +164,16 @@ const Menu = () => {
                         />
                     ))}
                 </section>
+                {/* BOTÃO FLUTUANTE DE CADASTRO (Aparece apenas se for admin) */}
+                {(
+                    <button
+                        className="btn-flutuante-cadastro"
+                        onClick={abrirCadastro}
+                        title="Cadastrar Novo Produto"
+                    >
+                        +
+                    </button>
+                )}
             </main>
         </>
     );

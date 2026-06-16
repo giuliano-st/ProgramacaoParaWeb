@@ -1,0 +1,32 @@
+/* Botão Flutuante (FAB) */
+.btn-flutuante-cadastro {
+    position: fixed;         /* Fixa o botão em relação à tela do navegador */
+    bottom: 30px;            /* Distância do fundo da página */
+    right: 30px;             /* Distância da lateral direita */
+    width: 60px;             /* Largura do botão circular */
+    height: 60px;            /* Altura do botão circular */
+    border-radius: 50px;     /* Deixa o botão perfeitamente redondo */
+    background-color: #ffcc00; /* Use a cor principal do seu restaurante (ex: verde, laranja, etc) */
+    color: white;            /* Cor do sinal de "+" */
+    font-size: 32px;         /* Tamanho do sinal de "+" */
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para dar o efeito de que está flutuando */
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    z-index: 999;            /* Garante que ele fique por cima dos cartões de produtos */
+}
+
+/* Efeito de hover ao passar o mouse */
+.btn-flutuante-cadastro:hover {
+    transform: scale(1.1);   /* Dá um leve zoom ao passar o mouse */
+    background-color: #e6ba02; /* Uma cor levemente mais escura para o feedback visual */
+}
+
+/* Efeito de clique */
+.btn-flutuante-cadastro:active {
+    transform: scale(0.95);
+}
