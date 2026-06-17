@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { ProdutoDados } from "../interfaces/ProdutoDados";
-
+// Função PUT atualizar()
 const API_URL = "http://localhost:8080";
 
 const atualizaDados = async (produto: ProdutoDados): Promise<ProdutoDados> => {

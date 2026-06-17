@@ -31,21 +31,28 @@ public class PedidoService {
     public PedidoDTOResponse salvar(PedidoDTORequest pedidoDTO){
         Pedido pedido = new Pedido();
         Cliente cliente = clienteRepository.findById(pedidoDTO.clienteId()).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+        final Double[] subtotal = {0.0};
         List<ItemPedido> itensPedido = pedidoDTO.itensPedido().stream().map(itemDTO -> {
             ItemPedido item = new ItemPedido();
 
-            Produto produto = produtoRepository.findById(itemDTO.getProdutoId().getId())
+            Produto produto = produtoRepository.findById(itemDTO.produtoId())
                     .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
 
             item.setPedidoId(pedido);
             item.setProdutoId(produto);
-            item.setQuantidade(itemDTO.getQuantidade());
+            item.setQuantidade(itemDTO.quantidade());
+
+            Double valorDoItem = produto.getPreco() * itemDTO.quantidade();
+            subtotal[0] += valorDoItem;
 
             return item;
         }).toList();
+
+        Double valorTotalComGarcom = subtotal[0] * 1.10;
+
         pedido.setClienteId(cliente);
         pedido.setItensPedido(itensPedido);
-        pedido.setValorTotal(pedidoDTO.valorTotal());
+        pedido.setValorTotal(valorTotalComGarcom);
         pedido.setStatus(pedidoDTO.status());
         pedido.setDataPedido(pedidoDTO.dataPedido());
         pedido.setDataEntrega(pedidoDTO.dataEntrega());
@@ -66,21 +73,30 @@ public class PedidoService {
     public PedidoDTOResponse atualizar(Long id, PedidoDTORequest pedidoDTO){
         Pedido pedido = pedidoRepository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado!"));
         Cliente cliente = clienteRepository.findById(pedidoDTO.clienteId()).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+
+        final Double[] subtotal = {0.0};
+
         List<ItemPedido> itensPedido = pedidoDTO.itensPedido().stream().map(itemDTO -> {
             ItemPedido item = new ItemPedido();
 
-            Produto produto = produtoRepository.findById(itemDTO.getProdutoId().getId())
+            Produto produto = produtoRepository.findById(itemDTO.produtoId())
                     .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
 
             item.setPedidoId(pedido);
             item.setProdutoId(produto);
-            item.setQuantidade(itemDTO.getQuantidade());
+            item.setQuantidade(itemDTO.quantidade());
+
+            Double valorDoItem = produto.getPreco() * itemDTO.quantidade();
+            subtotal[0] += valorDoItem;
 
             return item;
         }).toList();
+
+        Double valorTotalComGarcom = subtotal[0] * 1.10;
+
         pedido.setClienteId(cliente);
         pedido.setItensPedido(itensPedido);
-        pedido.setValorTotal(pedidoDTO.valorTotal());
+        pedido.setValorTotal(valorTotalComGarcom);
         pedido.setStatus(pedidoDTO.status());
         pedido.setDataPedido(pedidoDTO.dataPedido());
         pedido.setDataEntrega(pedidoDTO.dataEntrega());

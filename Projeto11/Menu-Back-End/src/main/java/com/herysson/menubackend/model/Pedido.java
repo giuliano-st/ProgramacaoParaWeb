@@ -1,5 +1,6 @@
 package com.herysson.menubackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,6 +18,7 @@ public class Pedido {
     @JoinColumn(name = "clienteId")
     private Cliente clienteId;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "pedidoId", cascade = CascadeType.ALL)
     private List<ItemPedido> itensPedido;
 

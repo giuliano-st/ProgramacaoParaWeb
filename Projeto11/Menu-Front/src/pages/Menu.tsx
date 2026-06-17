@@ -90,7 +90,7 @@ const Menu = () => {
 
     return (
         <>
-            <Navbar onNovoProduto={abrirCadastro} />
+            <Navbar/>
 
             <main className="container">
                 <h1>Cardápio</h1>

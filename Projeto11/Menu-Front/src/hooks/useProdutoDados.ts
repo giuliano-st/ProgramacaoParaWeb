@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import type { ProdutoDados } from "../interfaces/ProdutoDados";
-
+//Função GET listar() e buscarPorId()
 const API_URL = "http://localhost:8080";
 
 const buscarDados = async (): Promise<ProdutoDados[]> => {

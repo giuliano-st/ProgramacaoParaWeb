@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { ProdutoDados } from "../interfaces/ProdutoDados";
-
+//Função POST salvar()
 const API_URL = "http://localhost:8080";
 
 async function salvarProduto(produto: ProdutoDados) {

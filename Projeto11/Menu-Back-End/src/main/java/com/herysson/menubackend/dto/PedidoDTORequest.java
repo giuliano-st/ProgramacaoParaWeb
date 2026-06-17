@@ -6,5 +6,5 @@ import com.herysson.menubackend.model.ItemPedido;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record PedidoDTORequest(Long clienteId, List<ItemPedido> itensPedido, Double valorTotal, String status, LocalDateTime dataPedido, LocalDateTime dataEntrega) {
+public record PedidoDTORequest(Long clienteId, List<ItemPedidoDTORequest> itensPedido, /*Double valorTotal,*/ String status, LocalDateTime dataPedido, LocalDateTime dataEntrega) {
 }

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
+//Função DELETE deletar()
 const API_URL = "http://localhost:8080";
 
 const deleteDados = async (id: number): Promise<void> => {
