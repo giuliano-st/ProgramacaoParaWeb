@@ -2,6 +2,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Menu from "./pages/Menu";
 import Login from "./pages/Login";
+import Pedidos from "./pages/Pedidos";
 
 const AppRoutes = () => {
     // Pegamos o e-mail que salvamos no localStorage durante o Login
@@ -21,6 +22,10 @@ const AppRoutes = () => {
             <Route
                 path="/admin/produtos"
                 element={isAdmin ? <Menu isAdmin={true} /> : <Navigate to="/login" />}
+            />
+            <Route
+                path="/admin/pedidos"
+                element={isAdmin ? <Pedidos /> : <Navigate to="/login" />}
             />
         </Routes>
     );

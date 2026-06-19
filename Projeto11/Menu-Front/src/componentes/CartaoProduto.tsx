@@ -32,7 +32,8 @@ export function CartaoProduto({ produto, onEditar, onDeletar, onDesabilitar, onV
 
             <div className="cartao-conteudo">
                 <h2>{produto.nome}</h2>
-                <p><strong>Valor:</strong> R$ {produto.preco.toFixed(2)}</p>
+                <p><strong>Valor:</strong> R$ {produto.preco}</p>
+                {/* <p><strong>Valor:</strong> R$ {produto.preco.toFixed(2)}</p> */}
             </div>
 
             <div className="cartao-acoes">

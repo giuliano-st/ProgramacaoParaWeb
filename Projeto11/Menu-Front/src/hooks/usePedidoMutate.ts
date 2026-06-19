@@ -1,30 +1,30 @@
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { ProdutoDados } from "../interfaces/ProdutoDados";
+import type { PedidoDados } from "../interfaces/PedidoDados.ts";
 //Função POST salvar()
 const API_URL = "http://localhost:8080";
 
-async function salvarProduto(produto: ProdutoDados) {
+async function salvarPedido(pedido: PedidoDados) {
 
     const response = await axios.post(
-        `${API_URL}/produtos`,
-        produto
+        `${API_URL}/pedidos`,
+        pedido
     );
 
     return response.data;
 }
 
-export function useProdutoDadosMutate() {
+export function usePedidoMutate() {
 
     const queryClient = useQueryClient();
 
     return useMutation({
 
-        mutationFn: salvarProduto,
+        mutationFn: salvarPedido,
 
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ["produto-dados"]
+                queryKey: ["pedido-dados"]
             });
         }
 

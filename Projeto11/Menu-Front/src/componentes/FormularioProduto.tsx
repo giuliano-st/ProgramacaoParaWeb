@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import type { ProdutoDados } from "../interfaces/ProdutoDados";
-import { useProdutoDadosMutate } from "../hooks/useProdutoDadosMutate";
+import { useProdutoMutate } from "../hooks/useProdutoMutate.ts";
 import "./formularioProduto.css";
 
 interface FormularioProps {
@@ -17,7 +17,7 @@ export function FormularioProduto({ produtoInicial, onSubmit }: FormularioProps)
     const [imagem, setImagem] = useState(produtoInicial?.imagem || "");
     const [disponibilidade, setDisponibilidade] = useState(produtoInicial?.disponibilidade ?? true);
 
-    const { mutate: cadastrar } = useProdutoDadosMutate();
+    const { mutate: cadastrar } = useProdutoMutate();
 
     // Sincroniza os campos se o produto selecionado mudar enquanto o modal está aberto
     useEffect(() => {
