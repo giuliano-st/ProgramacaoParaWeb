@@ -19,7 +19,7 @@ public class Pedido {
     private Cliente clienteId;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "pedidoId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedidoId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itensPedido;
 
     private Double valorTotal;
