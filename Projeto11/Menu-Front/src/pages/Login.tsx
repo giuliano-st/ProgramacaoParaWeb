@@ -28,7 +28,7 @@ const Login = () => {
         } else {
             localStorage.setItem("usuarioLogado", email);
             alert(`Bem-vindo!`);
-            navigate("/");
+            navigate("/pedidos");
         }
     };
 

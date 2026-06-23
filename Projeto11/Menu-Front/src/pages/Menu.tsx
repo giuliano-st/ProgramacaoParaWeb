@@ -166,7 +166,6 @@ const Menu = () => {
                         />
                     ))}
                 </section>
-                {/* BOTÃO FLUTUANTE DE CADASTRO (Aparece apenas se for admin) */}
                 {(
                     <button
                         className="btn-flutuante-cadastro"

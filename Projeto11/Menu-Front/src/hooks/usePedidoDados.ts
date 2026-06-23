@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import type { PedidoDados } from "../interfaces/PedidoDados";
 
-const API_URL = "http://localhost:8080";
+const API_URL = `http://${window.location.hostname}:8080`;
 
 const buscarPedidos = async (): Promise<PedidoDados[]> => {
     // Certifique-se de que a rota mapeada no seu @RestController seja /pedidos

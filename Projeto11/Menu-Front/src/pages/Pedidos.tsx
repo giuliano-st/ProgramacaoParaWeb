@@ -6,11 +6,13 @@ import { usePedidoAtualizar } from "../hooks/usePedidoEditar.ts";
 import { Navbar } from "../componentes/Navbar.tsx";
 import { FormularioPedido } from "../componentes/FormularioPedido.tsx";
 import { CartaoPedido } from "../componentes/CartaoPedido.tsx";
+import { useNavigate } from "react-router-dom";
 
 const Pedidos = () => {
     const { data } = usePedidoDados();
     const [modalAberto, setModalAberto] = useState(false);
     const [tipoAcao, setTipoAcao] = useState<"cadastrar" | "editar" | "deletar" | "detalhes" | null>(null);
+    const navigate = useNavigate();
 
     const [pedidoSelecionado, setPedidoSelecionado] = useState<PedidoDados | null>(null);
 
@@ -103,7 +105,7 @@ const Pedidos = () => {
                             {tipoAcao === "cadastrar" && (
                                 <>
                                     <h2>Registrar Novo Pedido</h2>
-                                    <FormularioPedido />
+                                    <FormularioPedido/>
                                 </>
                             )}
 
@@ -123,24 +125,32 @@ const Pedidos = () => {
 
                                     <div className="detalhes-info">
                                         <p><strong>Cliente:</strong> {pedidoSelecionado.clienteId.nome}</p>
-                                        <p><strong>Status:</strong> <span className={`status-${pedidoSelecionado.status.toLowerCase()}`}>{pedidoSelecionado.status}</span></p>
-                                        <p><strong>Data do Pedido:</strong> {new Date(pedidoSelecionado.dataPedido).toLocaleString('pt-BR')}</p>
+                                        <p><strong>Status:</strong> <span
+                                            className={`status-${pedidoSelecionado.status.toLowerCase()}`}>{pedidoSelecionado.status}</span>
+                                        </p>
+                                        <p><strong>Data do
+                                            Pedido:</strong> {new Date(pedidoSelecionado.dataPedido).toLocaleString('pt-BR')}
+                                        </p>
                                         {pedidoSelecionado.dataEntrega && (
-                                            <p><strong>Data de Entrega:</strong> {new Date(pedidoSelecionado.dataEntrega).toLocaleString('pt-BR')}</p>
+                                            <p><strong>Data de
+                                                Entrega:</strong> {new Date(pedidoSelecionado.dataEntrega).toLocaleString('pt-BR')}
+                                            </p>
                                         )}
 
-                                        <hr />
+                                        <hr/>
                                         <h3>Itens do Pedido</h3>
                                         <ul className="lista-itens-detalhes">
                                             {pedidoSelecionado.itensPedido.map((item) => (
                                                 <li key={item.id}>
-                                                    {item.quantidade}x {item.produtoId.nome} — R$ {(item.produtoId.preco * item.quantidade).toFixed(2)}
+                                                    {item.quantidade}x {item.produtoId.nome} —
+                                                    R$ {(item.produtoId.preco * item.quantidade).toFixed(2)}
                                                 </li>
                                             ))}
                                         </ul>
-                                        <hr />
+                                        <hr/>
 
-                                        <p className="total-pedido"><strong>Valor Total (c/ 10%):</strong> R$ {pedidoSelecionado.valorTotal.toFixed(2)}</p>
+                                        <p className="total-pedido"><strong>Valor Total (c/
+                                            10%):</strong> R$ {pedidoSelecionado.valorTotal.toFixed(2)}</p>
                                     </div>
 
                                     <button className="btn-cancelar" onClick={fecharModal}>Fechar</button>
@@ -150,9 +160,11 @@ const Pedidos = () => {
                             {tipoAcao === "deletar" && (
                                 <div className="modal-deletar">
                                     <h2>Excluir Pedido</h2>
-                                    <p>Tem certeza que deseja cancelar/excluir o pedido de <strong>{pedidoSelecionado?.clienteId.nome}</strong>?</p>
+                                    <p>Tem certeza que deseja cancelar/excluir o pedido
+                                        de <strong>{pedidoSelecionado?.clienteId.nome}</strong>?</p>
                                     <div className="botoes-alerta">
-                                        <button className="btn-confirmar-delete" onClick={handleConfirmarDelecao} disabled={isDeletando}>
+                                        <button className="btn-confirmar-delete" onClick={handleConfirmarDelecao}
+                                                disabled={isDeletando}>
                                             {isDeletando ? "Excluindo..." : "Sim, excluir"}
                                         </button>
                                         <button className="btn-cancelar" onClick={fecharModal}>Cancelar</button>
@@ -176,6 +188,13 @@ const Pedidos = () => {
                         />
                     ))}
                 </section>
+                <button
+                    type="button"
+                    className="btn-cancelar"
+                    onClick={() => navigate("/")}
+                >
+                    Voltar para o Menu
+                </button>
 
                 {/* BOTÃO FLUTUANTE DE CADASTRO */}
                 <button

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { PedidoDados } from "../interfaces/PedidoDados.ts";
 //Função POST salvar()
-const API_URL = "http://localhost:8080";
+const API_URL = `http://${window.location.hostname}:8080`;
 
 async function salvarPedido(pedido: PedidoDados) {
 

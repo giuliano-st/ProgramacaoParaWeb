@@ -1,9 +1,11 @@
 // src/componentes/PainelLateralPedidos.tsx
 import { usePedidoDados } from "../hooks/usePedidoDados.ts";
 import "./PainelLateralPedidos.css";
+import {useNavigate} from "react-router-dom";
 
 export const PainelLateralPedidos = () => {
     const { data: pedidos, isLoading } = usePedidoDados();
+    const navigate = useNavigate();
 
     if (isLoading) return <aside className="painel-lateral"><h3>Carregando pedidos...</h3></aside>;
 
@@ -27,6 +29,13 @@ export const PainelLateralPedidos = () => {
                     ))
                 )}
             </div>
+            <button
+                type="button"
+                className="btn-cancelar"
+                onClick={() => navigate("/")}
+            >
+                Ver mais
+            </button>
         </aside>
     );
 };
