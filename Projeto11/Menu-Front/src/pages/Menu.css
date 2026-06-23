@@ -30,3 +30,15 @@
 .btn-flutuante-cadastro:active {
     transform: scale(0.95);
 }
+
+.layout-admin-dashboard {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+}
+
+/* Garante que a área do cardápio cresça e ocupe o espaço restante */
+.layout-admin-dashboard .container {
+    flex: 1;
+    padding: 20px;
+}

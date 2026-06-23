@@ -6,7 +6,6 @@ import { usePedidoAtualizar } from "../hooks/usePedidoEditar.ts";
 import { Navbar } from "../componentes/Navbar.tsx";
 import { FormularioPedido } from "../componentes/FormularioPedido.tsx";
 import { CartaoPedido } from "../componentes/CartaoPedido.tsx";
-//import "./Pedidos.css";
 
 const Pedidos = () => {
     const { data } = usePedidoDados();

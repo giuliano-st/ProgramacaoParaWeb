@@ -1,3 +1,4 @@
+import { PainelLateralPedidos } from "../componentes/PainelLateralPedidos.tsx";
 import {useProdutoDados} from "../hooks/useProdutoDados.ts";
 import {useState} from "react";
 import type {ProdutoDados} from "../interfaces/ProdutoDados.ts";
@@ -91,8 +92,9 @@ const Menu = () => {
     return (
         <>
             <Navbar/>
-
+            <div className="layout-admin-dashboard">
             <main className="container">
+
                 <h1>Cardápio</h1>
 
                 {modalAberto && (
@@ -175,6 +177,8 @@ const Menu = () => {
                     </button>
                 )}
             </main>
+                <PainelLateralPedidos />
+            </div>
         </>
     );
 };

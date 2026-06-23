@@ -10,8 +10,8 @@ function App() {
         <>
             <nav className="menu-navegacao">
                 <Link to="/">Menu </Link>
-                <Link to="/Login">Login</Link>
-                <Link to="/admin/pedidos">Gerenciar Pedidos</Link>
+                <Link to="/Login">Login </Link>
+                <Link to="/pedidos">Pedidos</Link>
             </nav>
             <AppRoutes />
 

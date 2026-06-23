@@ -216,7 +216,6 @@ public class DataInitializer {
                         pedidos.add(p5);
                     }
 
-                    // Salva todos os pedidos. Graças ao CascadeType.ALL, os itens vão junto!
                     pedidoRepository.saveAll(pedidos);
                 }
             }
@@ -227,7 +226,7 @@ public class DataInitializer {
         Produto produto = new Produto();
         produto.setNome(nome);
         produto.setCategoria(categoria);
-        produto.setPreco(preco); // Tipo alterado para Double
+        produto.setPreco(preco);
         produto.setImagem(imagem);
         produto.setDescricao(descricao);
         produto.setDisponibilidade(true);

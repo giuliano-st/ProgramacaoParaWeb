@@ -24,18 +24,16 @@ const Login = () => {
         if (email === "admin@email.com") {
             localStorage.setItem("usuarioLogado", email);
             alert("Bem-vindo, Administrador!");
-            navigate("/"); // Rota exclusiva do admin
+            navigate("/");
         } else {
             localStorage.setItem("usuarioLogado", email);
             alert(`Bem-vindo!`);
-            navigate("/"); // Rota do cardápio para os clientes
+            navigate("/");
         }
     };
 
     return (
-        <><Navbar onNovoProduto={function(): void { //Alterar dps
-            throw new Error("Function not implemented.");
-        } }/>
+        <><Navbar/>
             <main className="container">
                 {}
                 <div className="overlay" style={{position: "relative", minHeight: "60vh", background: "none"}}>
