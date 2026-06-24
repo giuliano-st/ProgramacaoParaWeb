@@ -49,6 +49,37 @@
     margin-bottom: 5px;
 }
 
+.btn-mais {
+    display: block;
+    width: fit-content;      /* Faz o botão ter o tamanho apenas do texto interno */
+    margin: 15px auto 0 auto; /* O 'auto' nas laterais centraliza o botão horizontalmente */
+
+    /* Design moderno */
+    background-color: #007bff; /* Azul padrão (mude para a cor do seu sistema) */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;       /* Borda levemente arredondada, mais moderna que 2px */
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+
+    /* Transição suave para o efeito de passar o mouse */
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+.btn-mais:hover {
+    background-color: #0056b3; /* Um azul um pouco mais escuro */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Efeito de clique */
+.btn-mais:active {
+    transform: scale(0.98); /* Sutil efeito de "afundar" ao clicar */
+}
+
 /* Cores dinâmicas baseadas no status */
 .cartao-mini-pedido.status-pendente { border-left-color: #ffc107; }
 .cartao-mini-pedido.status-entregue { border-left-color: #28a745; }

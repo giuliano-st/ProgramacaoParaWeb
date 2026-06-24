@@ -106,14 +106,14 @@ export function FormularioProduto({ produtoInicial, onSubmit }: FormularioProps)
                 onChange={(e) => setImagem(e.target.value)}
             />
 
-            <label className="checkbox-label">
+            <div className="campo-checkbox">
                 <input
                     type="checkbox"
-                    checked={disponibilidade}
-                    onChange={(e) => setDisponibilidade(e.target.checked)}
+                    id="disponivel"
+                    name="disponivel"
                 />
-                Produto disponível
-            </label>
+                <label htmlFor="disponivel">Disponível no cardápio</label>
+            </div>
 
             <button type="submit">
                 {produtoInicial ? "Salvar Alterações" : "Cadastrar"}

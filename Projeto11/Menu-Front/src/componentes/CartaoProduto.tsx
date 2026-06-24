@@ -16,7 +16,6 @@ export function CartaoProduto({ produto, onEditar, onDeletar, onDesabilitar, onV
             <div className="cartao-header">
                 <img src={produto.imagem} alt={`Imagem de ${produto.nome}`} />
 
-                {/* Botão que utiliza o SVG da Wikipedia */}
                 <button
                     className="btn-icone-detalhes"
                     onClick={onVerDetalhes}

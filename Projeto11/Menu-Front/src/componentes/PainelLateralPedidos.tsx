@@ -31,8 +31,8 @@ export const PainelLateralPedidos = () => {
             </div>
             <button
                 type="button"
-                className="btn-cancelar"
-                onClick={() => navigate("/")}
+                className="btn-mais"
+                onClick={() => navigate("/pedidos")}
             >
                 Ver mais
             </button>

@@ -1,20 +1,106 @@
+/* Container do Formulário - Transformado em um Card Elegante */
 .formulario {
-    width: 300px;
+    width: 100%;
+    max-width: 450px; /* Aumentamos um pouco de 300px para os inputs respirarem melhor */
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef0f3;
 
     display: flex;
     flex-direction: column;
-
-    gap: 10px;
-
+    gap: 20px; /* Maior espaçamento entre os campos */
     margin-bottom: 30px;
 }
 
+/* Estilização Geral de Inputs e Textareas */
 .formulario input,
-.formulario textarea,
-.formulario button {
-    padding: 10px;
+.formulario textarea {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    color: #333333;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
 }
 
+/* Placeholder com cor mais suave */
+.formulario input::placeholder,
+.formulario textarea::placeholder {
+    color: #a0a0a0;
+}
+
+/* Área de texto (Descrição do Produto) */
 .formulario textarea {
-    height: 80px;
+    height: 100px;
+    resize: vertical; /* Permite ao usuário esticar apenas para baixo se precisar */
+}
+
+/* Efeito de Foco - Conectando com a cor do seu Menu (#ffcc00) */
+.formulario input:focus,
+.formulario textarea:focus {
+    background-color: #ffffff;
+    border-color: #ffcc00;
+    box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.15); /* Sutil brilho amarelo ao redor */
+}
+
+/* Botão de Salvar/Cadastrar Produto */
+.formulario button {
+    background-color: #ffcc00; /* Mesma cor do seu FAB */
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Melhora o contraste do texto branco no fundo amarelo */
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(255, 204, 0, 0.2);
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+/* Efeitos do Botão */
+.formulario button:hover {
+    background-color: #e6ba02; /* Tom mais escuro igual ao do seu hover do menu */
+    box-shadow: 0 6px 12px rgba(255, 204, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.formulario button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(255, 204, 0, 0.2);
+}
+/* Container específico para o campo de Checkbox */
+.campo-checkbox {
+    display: flex;
+    flex-direction: row; /* Força o input e a label a ficarem lado a lado */
+    align-items: center; /* Alinha verticalmente o checkbox com o texto */
+    gap: 10px;           /* Espaço entre o quadradinho e o texto "Disponível" */
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+/* Reseta as propriedades genéricas apenas para o input do tipo checkbox */
+.formulario input[type="checkbox"] {
+    width: 18px;         /* Tamanho fixo do quadradinho */
+    height: 18px;        /* Tamanho fixo do quadradinho */
+    padding: 0;          /* Remove o padding que estava deformando ele */
+    margin: 0;
+    accent-color: #ffcc00; /* Faz a cor interna do checkbox ficar amarela ao marcar! */
+    cursor: pointer;
+}
+
+/* Estilo do texto ao lado do checkbox */
+.campo-checkbox label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #444444;
+    cursor: pointer;
+    user-select: none;   /* Evita que o texto fique azul/selecionado ao dar duplo clique */
 }

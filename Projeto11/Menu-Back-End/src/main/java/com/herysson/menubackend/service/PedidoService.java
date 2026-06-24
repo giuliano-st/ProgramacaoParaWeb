@@ -71,12 +71,15 @@ public class PedidoService {
     }
 
     public PedidoDTOResponse atualizar(Long id, PedidoDTORequest pedidoDTO){
-        Pedido pedido = pedidoRepository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado!"));
-        Cliente cliente = clienteRepository.findById(pedidoDTO.clienteId()).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado!"));
+        Cliente cliente = clienteRepository.findById(pedidoDTO.clienteId())
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
 
         final Double[] subtotal = {0.0};
 
-        List<ItemPedido> itensPedido = pedidoDTO.itensPedido().stream().map(itemDTO -> {
+        // 1. Mudamos o final para .collect(Collectors.toList()) para torná-la mutável
+        List<ItemPedido> novosItens = pedidoDTO.itensPedido().stream().map(itemDTO -> {
             ItemPedido item = new ItemPedido();
 
             Produto produto = produtoRepository.findById(itemDTO.produtoId())
@@ -90,18 +93,31 @@ public class PedidoService {
             subtotal[0] += valorDoItem;
 
             return item;
-        }).toList();
+        }).collect(Collectors.toList());
 
         Double valorTotalComGarcom = subtotal[0] * 1.10;
 
         pedido.setClienteId(cliente);
-        pedido.setItensPedido(itensPedido);
         pedido.setValorTotal(valorTotalComGarcom);
         pedido.setStatus(pedidoDTO.status());
         pedido.setDataPedido(pedidoDTO.dataPedido());
         pedido.setDataEntrega(pedidoDTO.dataEntrega());
+
+        // 2. O TRUQUE PARA O HIBERNATE: Mexer na lista existente em vez de trocá-la
+        pedido.getItensPedido().clear();          // Agora o Hibernate limpa os antigos no banco
+        pedido.getItensPedido().addAll(novosItens); // E adiciona os novos rastreados corretamente
+
         pedidoRepository.save(pedido);
-        return new PedidoDTOResponse(pedido.getId(), pedido.getClienteId(), pedido.getItensPedido(), pedido.getValorTotal(), pedido.getStatus(), pedido.getDataPedido(), pedido.getDataEntrega());
+
+        return new PedidoDTOResponse(
+                pedido.getId(),
+                pedido.getClienteId(),
+                pedido.getItensPedido(),
+                pedido.getValorTotal(),
+                pedido.getStatus(),
+                pedido.getDataPedido(),
+                pedido.getDataEntrega()
+        );
     }
 
     public void deletar(Long id){

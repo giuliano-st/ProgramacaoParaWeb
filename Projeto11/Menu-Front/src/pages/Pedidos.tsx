@@ -1,5 +1,5 @@
-import { usePedidoDados } from "../hooks/usePedidoDados.ts";
 import { useState } from "react";
+import { usePedidoDados } from "../hooks/usePedidoDados.ts";
 import type { PedidoDados } from "../interfaces/PedidoDados.ts";
 import { usePedidoDeletar } from "../hooks/usePedidoDeletar.ts";
 import { usePedidoAtualizar } from "../hooks/usePedidoEditar.ts";
@@ -18,12 +18,6 @@ const Pedidos = () => {
 
     const { mutate: deletarPedido, isPending: isDeletando } = usePedidoDeletar();
     const { mutate: editarPedido } = usePedidoAtualizar();
-
-    const abrirCadastro = () => {
-        setTipoAcao("cadastrar");
-        setPedidoSelecionado(null);
-        setModalAberto(true);
-    };
 
     const abrirEdicao = (pedido: PedidoDados) => {
         setTipoAcao("editar");
@@ -190,19 +184,10 @@ const Pedidos = () => {
                 </section>
                 <button
                     type="button"
-                    className="btn-cancelar"
+                    className="btn-menu"
                     onClick={() => navigate("/")}
                 >
                     Voltar para o Menu
-                </button>
-
-                {/* BOTÃO FLUTUANTE DE CADASTRO */}
-                <button
-                    className="btn-flutuante-cadastro"
-                    onClick={abrirCadastro}
-                    title="Registrar Novo Pedido"
-                >
-                    +
                 </button>
             </main>
         </>
