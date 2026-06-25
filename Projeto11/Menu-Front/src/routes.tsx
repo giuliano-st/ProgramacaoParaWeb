@@ -1,4 +1,3 @@
-// routes.tsx
 import { Routes, Route} from "react-router-dom";
 import Menu from "./pages/Menu";
 import Login from "./pages/Login";

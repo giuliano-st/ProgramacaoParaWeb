@@ -1,29 +1,26 @@
 import { useState, useEffect } from "react";
 import type { PedidoDados, ItemPedido, Cliente } from "../interfaces/PedidoDados";
-import { useProdutoDados } from "../hooks/useProdutoDados.ts"; // Para carregar os produtos no select
-import { usePedidoMutate } from "../hooks/usePedidoMutate.ts"; // Sua mutação de cadastro
+import { useProdutoDados } from "../hooks/useProdutoDados.ts";
+import { usePedidoMutate } from "../hooks/usePedidoMutate.ts";
 import "./formularioPedido.css";
 
 interface FormularioProps {
     pedidoInicial?: PedidoDados | null;
-    onSubmit?: (dados: PedidoDados) => void; // Prop para o caso de edição
+    onSubmit?: (dados: PedidoDados) => void;
 }
 
 export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
-    // 1. Estados locais do Pedido
     const [clienteId, setClienteId] = useState<number>(pedidoInicial?.clienteId?.id || 0);
     const [clienteNome, setClienteNome] = useState<string>(pedidoInicial?.clienteId?.nome || "");
     const [status, setStatus] = useState<string>(pedidoInicial?.status || "PENDENTE");
     const [itensPedido, setItensPedido] = useState<ItemPedido[]>(pedidoInicial?.itensPedido || []);
 
-    // 2. Estados auxiliares para adicionar itens dinamicamente
     const { data: produtos } = useProdutoDados();
     const [produtoSelecionadoId, setProdutoSelecionadoId] = useState<string>("");
     const [quantidadeSelecionada, setQuantidadeSelecionada] = useState<number>(1);
 
     const { mutate: cadastrarPedido } = usePedidoMutate();
 
-    // 3. Sincroniza se o pedido inicial mudar (modo edição)
     useEffect(() => {
         if (pedidoInicial) {
             setClienteId(pedidoInicial.clienteId.id);
@@ -33,14 +30,12 @@ export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
         }
     }, [pedidoInicial]);
 
-    // 4. Lógica para gerenciar a lista de itens locais do formulário
     const adicionarItem = () => {
         if (!produtoSelecionadoId) return alert("Selecione um produto!");
 
         const produtoEncontrado = produtos?.find(p => p.id === Number(produtoSelecionadoId));
         if (!produtoEncontrado) return;
 
-        // Evita duplicar o mesmo produto na lista; soma a quantidade se já existir
         const itemExistente = itensPedido.find(item => item.produtoId.id === produtoEncontrado.id);
         if (itemExistente) {
             setItensPedido(itensPedido.map(item =>
@@ -56,7 +51,6 @@ export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
             setItensPedido([...itensPedido, novoItem]);
         }
 
-        // Reseta os seletores auxiliares
         setProdutoSelecionadoId("");
         setQuantidadeSelecionada(1);
     };
@@ -65,7 +59,6 @@ export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
         setItensPedido(itensPedido.filter(item => item.produtoId.id !== produtoId));
     };
 
-    // 5. Envio do formulário
     function enviarFormulario(event: React.FormEvent) {
         event.preventDefault();
 
@@ -73,7 +66,6 @@ export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
             return alert("Adicione pelo menos um item ao pedido!");
         }
 
-        // Montamos o objeto Cliente fake para bater com a interface esperada
         const clienteObjeto: Cliente = {
             id: clienteId,
             nome: clienteNome || `Cliente #${clienteId}`
@@ -84,7 +76,7 @@ export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
             clienteId: clienteObjeto,
             itensPedido,
             status,
-            valorTotal: pedidoInicial?.valorTotal || 0, // Backend recalcula isso de qualquer forma
+            valorTotal: pedidoInicial?.valorTotal || 0,
             dataPedido: pedidoInicial?.dataPedido || new Date().toISOString()
         };
 
@@ -107,7 +99,6 @@ export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
         <form className="formulario" onSubmit={enviarFormulario}>
             <h2>{pedidoInicial ? `Editar Pedido #${pedidoInicial.id}` : "Novo Pedido"}</h2>
 
-            {/* Informações do Cliente */}
             <div className="grupo-input">
                 <input
                     type="number"
@@ -124,7 +115,6 @@ export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
                 />
             </div>
 
-            {/* Status do Pedido */}
             <select value={status} onChange={(e) => setStatus(e.target.value)}>
                 <option value="PENDENTE">Pendente</option>
                 <option value="PREPARANDO">Preparando</option>
@@ -136,7 +126,6 @@ export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
             <hr />
             <h3>Adicionar Itens</h3>
 
-            {/* Seletor dinâmico de Produtos */}
             <div className="adicionar-itens-container">
                 <select
                     value={produtoSelecionadoId}
@@ -160,7 +149,6 @@ export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
                 </button>
             </div>
 
-            {/* Lista Provisória de Itens inseridos */}
             <div className="lista-itens-adicionados">
                 <h4>Itens do Pedido atual:</h4>
                 {itensPedido.length === 0 ? (

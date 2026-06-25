@@ -23,7 +23,7 @@
 }
 
 .footerSection h3 {
-    color: #ffcc00; /* Amarelo maionese caseira */
+    color: #ffcc00;
     font-size: 18px;
     margin-bottom: 15px;
     text-transform: uppercase;
@@ -44,7 +44,7 @@
 }
 
 .socialLinks a:hover {
-    color: #ff3333; /* Vermelho ketchup */
+    color: #ff3333;
 }
 
 .footerBottom {

@@ -1,4 +1,3 @@
-/* Container principal */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -6,21 +5,18 @@
     font-family: sans-serif;
 }
 
-/* Título */
 h1 {
     color: #333;
     margin-bottom: 24px;
     font-size: 2rem;
 }
 
-/* Grid de Clientes - Responsivo automático */
 .lista-clientes {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
 }
 
-/* Estilização do Cartão Clicável */
 .card-cliente {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
@@ -34,20 +30,17 @@ h1 {
     justify-content: center;
 }
 
-/* Efeito ao passar o mouse (Hover) */
 .card-cliente:hover {
-    transform: translateY(-4px); /* Dá a sensação de que o card "levanta" */
+    transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border-color: #007bff; /* Cor de destaque (mude para a cor do seu app) */
+    border-color: #007bff;
 }
 
-/* Efeito ao clicar (Active) */
 .card-cliente:active {
-    transform: translateY(-1px); /* Quase volta ao normal, simulando o clique */
+    transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Elementos de texto dentro do card */
 .card-cliente h3 {
     margin: 0 0 8px 0;
     color: #222;
@@ -59,5 +52,5 @@ h1 {
     margin: 0;
     color: #666;
     font-size: 0.95rem;
-    word-break: break-all; /* Evita que emails longos quebrem o layout */
+    word-break: break-all;
 }

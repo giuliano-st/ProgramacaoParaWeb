@@ -5,7 +5,6 @@ function Footer() {
         <footer className={styles.mainFooter}>
             <div className={styles.footerContainer}>
 
-                {/* Seção Sobre / Nome */}
                 <div className={styles.footerSection}>
                     <h3>Xis Comeu Morreu</h3>
                     <p>
@@ -14,7 +13,6 @@ function Footer() {
                     </p>
                 </div>
 
-                {/* Seção Localização Fictícia */}
                 <div className={styles.footerSection}>
                     <h3>Onde Nos Encontrar</h3>
                     <p>📍 Avenida da Azia, nº 666</p>
@@ -22,7 +20,6 @@ function Footer() {
                     <p>Porto Alegre - RS | CEP: 90000-000</p>
                 </div>
 
-                {/* Seção Redes Sociais */}
                 <div className={styles.footerSection}>
                     <h3>Siga a Fome</h3>
                     <div className={styles.socialLinks}>
@@ -58,7 +55,6 @@ function Footer() {
 
             </div>
 
-            {/* Linha de Direitos Autorais */}
             <div className={styles.footerBottom}>
                 <p>
                     &copy; 2026 Xis Comeu Morreu - Todos os direitos reservados.

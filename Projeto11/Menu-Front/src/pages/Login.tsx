@@ -1,18 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {Navbar} from "../componentes/Navbar.tsx"; // Caso queira redirecionar após o login
-// import { useLogin } from "../hooks/useLogin.ts"; // Exemplo de hook futuro para a API
+import {Navbar} from "../componentes/Navbar.tsx";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const navigate = useNavigate();
-
-    // Simulando o hook de mutação do React Query que você usa no Menu
-    // const {mutate: fazerLogin, isPending } = useLogin();
     const isPending = false; // Mock por enquanto
 
-// Dentro do seu componente ‘Login’.tsx
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -43,7 +38,6 @@ const Login = () => {
                         <h2>Acessar o Sistema</h2>
 
                         <form onSubmit={handleSubmit} className="formulario-produto">
-                            {/* Usei a classe fictícia 'formulario-produto' para herdar os estilos de input que você já tem */}
 
                             <div className="detalhes-info"
                                  style={{display: "flex", flexDirection: "column", gap: "15px", textAlign: "left"}}>

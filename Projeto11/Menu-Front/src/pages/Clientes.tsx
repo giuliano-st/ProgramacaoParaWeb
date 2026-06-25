@@ -1,4 +1,3 @@
-// Clientes.tsx
 import { useNavigate } from "react-router-dom";
 import { useClienteDados } from "../hooks/useClienteDados";
 import "./Clientes.css";

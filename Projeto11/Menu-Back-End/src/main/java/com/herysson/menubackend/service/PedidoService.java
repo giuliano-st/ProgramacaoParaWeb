@@ -11,7 +11,6 @@ import com.herysson.menubackend.repository.PedidoRepository;
 import com.herysson.menubackend.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,7 +77,6 @@ public class PedidoService {
 
         final Double[] subtotal = {0.0};
 
-        // 1. Mudamos o final para .collect(Collectors.toList()) para torná-la mutável
         List<ItemPedido> novosItens = pedidoDTO.itensPedido().stream().map(itemDTO -> {
             ItemPedido item = new ItemPedido();
 
@@ -103,9 +101,8 @@ public class PedidoService {
         pedido.setDataPedido(pedidoDTO.dataPedido());
         pedido.setDataEntrega(pedidoDTO.dataEntrega());
 
-        // 2. O TRUQUE PARA O HIBERNATE: Mexer na lista existente em vez de trocá-la
-        pedido.getItensPedido().clear();          // Agora o Hibernate limpa os antigos no banco
-        pedido.getItensPedido().addAll(novosItens); // E adiciona os novos rastreados corretamente
+        pedido.getItensPedido().clear();
+        pedido.getItensPedido().addAll(novosItens);
 
         pedidoRepository.save(pedido);
 

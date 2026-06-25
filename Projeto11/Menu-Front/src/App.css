@@ -62,20 +62,17 @@
 
 .detalhes-imagem-container {
     width: 100%;
-    height: 300px; /* Defina a altura que desejar para o padrão */
+    height: 300px;
     overflow: hidden;
     border-radius: 8px;
     margin-bottom: 15px;
-    background-color: #f9f9f9; /* Cor de fundo caso a imagem demore a carregar */
+    background-color: #f9f9f9;
 }
 
 .detalhes-imagem-container img {
     width: 100%;
     height: 100%;
-    /* O segredo para não distorcer a imagem: */
     object-fit: cover;
-    /* Se preferir que a imagem apareça inteira sem cortes (mesmo com espaços vazios): */
-    /* object-fit: contain; */
 }
 
 .detalhes-info p {

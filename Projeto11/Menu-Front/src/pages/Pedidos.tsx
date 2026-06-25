@@ -37,7 +37,6 @@ const Pedidos = () => {
         setModalAberto(true);
     };
 
-    // Altera rapidamente o status do pedido (ex: de "PENDENTE" para "ENTREGUE")
     const handleMudarStatus = (pedido: PedidoDados, novoStatus: string) => {
         if (!pedido.id) return;
 
@@ -177,7 +176,6 @@ const Pedidos = () => {
                             onVerDetalhes={() => abrirDetalhes(pedido)}
                             onEditar={() => abrirEdicao(pedido)}
                             onDeletar={() => abrirDelecao(pedido)}
-                            // Exemplo de ação rápida: Altera o status para "CONCLUIDO" diretamente da listagem
                             onMudarStatus={(novoStatus) => handleMudarStatus(pedido, novoStatus)}
                         />
                     ))}

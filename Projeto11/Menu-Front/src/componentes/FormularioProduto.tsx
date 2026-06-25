@@ -5,11 +5,10 @@ import "./formularioProduto.css";
 
 interface FormularioProps {
     produtoInicial?: ProdutoDados | null;
-    onSubmit?: (dados: ProdutoDados) => void; // Prop opcional para o caso de edição
+    onSubmit?: (dados: ProdutoDados) => void;
 }
 
 export function FormularioProduto({ produtoInicial, onSubmit }: FormularioProps) {
-    // Inicializamos os estados com os valores do produtoInicial (se houver)
     const [nome, setNome] = useState(produtoInicial?.nome || "");
     const [descricao, setDescricao] = useState(produtoInicial?.descricao || "");
     const [preco, setPreco] = useState(produtoInicial?.preco?.toString() || "");
@@ -19,7 +18,6 @@ export function FormularioProduto({ produtoInicial, onSubmit }: FormularioProps)
 
     const { mutate: cadastrar } = useProdutoMutate();
 
-    // Sincroniza os campos se o produto selecionado mudar enquanto o modal está aberto
     useEffect(() => {
         if (produtoInicial) {
             setNome(produtoInicial.nome);
@@ -35,7 +33,6 @@ export function FormularioProduto({ produtoInicial, onSubmit }: FormularioProps)
         event.preventDefault();
 
         const produto: ProdutoDados = {
-            // Se for edição, mantemos o ID original
             ...(produtoInicial?.id && { id: produtoInicial.id }),
             nome,
             descricao,
@@ -45,13 +42,10 @@ export function FormularioProduto({ produtoInicial, onSubmit }: FormularioProps)
             disponibilidade
         };
 
-        // Lógica: se houver a prop onSubmit (passada pelo App na edição), use-a.
-        // Caso contrário, use a mutação de cadastro padrão.
         if (onSubmit) {
             onSubmit(produto);
         } else {
             cadastrar(produto);
-            // Limpar campos apenas no cadastro
             limparCampos();
         }
     }
@@ -67,7 +61,6 @@ export function FormularioProduto({ produtoInicial, onSubmit }: FormularioProps)
 
     return (
         <form className="formulario" onSubmit={enviarFormulario}>
-            {/* Título dinâmico */}
             <h2>{produtoInicial ? "Editar Produto" : "Novo Produto"}</h2>
 
             <input

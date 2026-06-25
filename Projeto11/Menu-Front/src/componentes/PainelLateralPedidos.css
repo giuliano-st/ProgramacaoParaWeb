@@ -1,10 +1,9 @@
-/* src/componentes/PainelLateralPedidos.css */
 .painel-lateral {
     width: 320px;
     background-color: #f8f9fa;
     border-left: 1px solid #ddd;
     padding: 20px;
-    height: calc(100vh - 80px); /* Ajuste baseado na altura da sua Navbar */
+    height: calc(100vh - 80px);
     position: sticky;
     top: 80px;
     display: flex;
@@ -19,11 +18,10 @@
 
 .lista-rolante-pedidos {
     flex: 1;
-    overflow-y: auto; /* Ativa a rolagem vertical */
+    overflow-y: auto;
     padding-right: 5px;
 }
 
-/* Customização da barra de rolagem (opcional) */
 .lista-rolante-pedidos::-webkit-scrollbar {
     width: 6px;
 }
@@ -32,7 +30,6 @@
     border-radius: 4px;
 }
 
-/* Estilo dos minicartões de pedido */
 .cartao-mini-pedido {
     background: white;
     border-radius: 8px;
@@ -51,35 +48,28 @@
 
 .btn-mais {
     display: block;
-    width: fit-content;      /* Faz o botão ter o tamanho apenas do texto interno */
-    margin: 15px auto 0 auto; /* O 'auto' nas laterais centraliza o botão horizontalmente */
-
-    /* Design moderno */
-    background-color: #007bff; /* Azul padrão (mude para a cor do seu sistema) */
+    width: fit-content;
+    margin: 15px auto 0 auto;
+    background-color: #007bff;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
     font-size: 0.95rem;
     font-weight: 600;
-    border-radius: 6px;       /* Borda levemente arredondada, mais moderna que 2px */
+    border-radius: 6px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
-
-    /* Transição suave para o efeito de passar o mouse */
     transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
-/* Efeito ao passar o mouse */
 .btn-mais:hover {
-    background-color: #0056b3; /* Um azul um pouco mais escuro */
+    background-color: #0056b3;
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
 }
 
-/* Efeito de clique */
 .btn-mais:active {
-    transform: scale(0.98); /* Sutil efeito de "afundar" ao clicar */
+    transform: scale(0.98);
 }
 
-/* Cores dinâmicas baseadas no status */
 .cartao-mini-pedido.status-pendente { border-left-color: #ffc107; }
 .cartao-mini-pedido.status-entregue { border-left-color: #28a745; }

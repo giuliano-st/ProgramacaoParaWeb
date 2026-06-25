@@ -1,7 +1,6 @@
 import "./cartaoProduto.css";
 import type { ProdutoDados } from "../interfaces/ProdutoDados";
 
-
 interface CartaoProdutoProps {
     produto: ProdutoDados;
     onEditar: () => void;

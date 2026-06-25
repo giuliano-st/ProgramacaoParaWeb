@@ -1,9 +1,9 @@
 .recibo-card {
-    background-color: #fffdeb; /* Tom levemente amarelado de papel térmico */
+    background-color: #fffdeb;
     border: 1px solid #e0dcb5;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     padding: 16px;
-    font-family: 'Courier New', Courier, monospace; /* Fonte mono para lembrar impressora antiga */
+    font-family: 'Courier New', Courier, monospace;
     color: #333;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,6 @@
     font-weight: bold;
 }
 
-/* Cores de Status */
 .status-pendente { background-color: #ffeeb2; color: #856404; }
 .status-preparando { background-color: #b8daff; color: #004085; }
 .status-pronto { background-color: #c3e6cb; color: #155724; }
@@ -58,7 +57,7 @@
     padding: 0;
     margin: 0;
     max-height: 120px;
-    overflow-y: auto; /* Caso o pedido seja gigante, ele cria scroll interno */
+    overflow-y: auto;
 }
 
 .recibo-item {
@@ -121,31 +120,25 @@
 
 .btn-menu {
     display: block;
-    width: fit-content;      /* Faz o botão ter o tamanho apenas do texto interno */
-    margin: 15px auto 0 auto; /* O 'auto' nas laterais centraliza o botão horizontalmente */
-
-    /* Design moderno */
-    background-color: #007bff; /* Azul padrão (mude para a cor do seu sistema) */
+    width: fit-content;
+    margin: 15px auto 0 auto;
+    background-color: #007bff;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
     font-size: 0.95rem;
     font-weight: 600;
-    border-radius: 6px;       /* Borda levemente arredondada, mais moderna que 2px */
+    border-radius: 6px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
-
-    /* Transição suave para o efeito de passar o mouse */
     transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
-/* Efeito ao passar o mouse */
 .btn-menu:hover {
-    background-color: #0056b3; /* Um azul um pouco mais escuro */
+    background-color: #0056b3;
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
 }
 
-/* Efeito de clique */
 .btn-menu:active {
-    transform: scale(0.98); /* Sutil efeito de "afundar" ao clicar */
+    transform: scale(0.98);
 }
