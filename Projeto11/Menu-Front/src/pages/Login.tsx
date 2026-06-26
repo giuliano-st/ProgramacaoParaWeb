@@ -1,13 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {Navbar} from "../componentes/Navbar.tsx";
+import { useClienteDados } from "../hooks/useClienteDados";
+import { useClienteMutate } from "../hooks/useClienteMutate";
+import { Navbar } from "../componentes/Navbar.tsx";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-    const navigate = useNavigate();
-    const isPending = false; // Mock por enquanto
 
+    // Estados para o Modal de Cadastro
+    const [isModalAberto, setIsModalAberto] = useState(false);
+    const [novoNome, setNovoNome] = useState("");
+    const [novoEmail, setNovoEmail] = useState("");
+    const [novoEndereco, setNovoEndereco] = useState("");
+    const [novaPreferencia, setNovaPreferencia] = useState("");
+
+    // Puxando os dados e a função de criar do seu hook
+    const { data: clientes } = useClienteDados();
+    const { mutate: salvarCliente } = useClienteMutate();
+    const navigate = useNavigate();
+
+    // Lógica de Login (Validando por E-mail)
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -16,34 +29,69 @@ const Login = () => {
             return;
         }
 
+        // 1. Verifica se é Admin
         if (email === "admin@email.com") {
             localStorage.setItem("usuarioLogado", email);
             alert("Bem-vindo, Administrador!");
             navigate("/");
-        } else {
+            return;
+        }
+
+        // 2. Valida se o e-mail existe na lista de clientes da API
+        const clienteExiste = clientes?.some((c) => c.email.toLowerCase() === email.toLowerCase());
+
+        if (clienteExiste) {
             localStorage.setItem("usuarioLogado", email);
             alert(`Bem-vindo!`);
             navigate("/pedidos");
+        } else {
+            alert("E-mail não encontrado. Por favor, cadastre-se primeiro!");
         }
     };
 
-    return (
-        <><Navbar/>
-            <main className="container">
-                {}
-                <div className="overlay" style={{position: "relative", minHeight: "60vh", background: "none"}}>
-                    <div className="modal"
-                         style={{position: "relative", top: 0, left: 0, transform: "none", margin: "0 auto"}}>
+    // Lógica de Cadastro dentro do Modal
+    const handleCadastrarCliente = (e: React.FormEvent) => {
+        e.preventDefault();
 
+        // Validação básica para garantir que tudo foi preenchido
+        if (!novoNome || !novoEmail || !novoEndereco || !novaPreferencia) {
+            return alert("Por favor, preencha todos os campos!");
+        }
+
+        const jaExiste = clientes?.some((c) => c.email.toLowerCase() === novoEmail.toLowerCase());
+        if (jaExiste) return alert("Este e-mail já está cadastrado!");
+
+        // Enviando o objeto completo para o seu mutate
+        salvarCliente({
+            nome: novoNome,
+            email: novoEmail,
+            enderecoEntrega: novoEndereco,
+            preferenciaPagamento: novaPreferencia // Atenção ao nome exato da sua ‘interface’
+        });
+
+        alert("Cadastro realizado com sucesso!");
+
+        // Limpa todos os campos e fecha
+        setNovoNome("");
+        setNovoEmail("");
+        setNovoEndereco("");
+        setNovaPreferencia("");
+        setIsModalAberto(false);
+        setEmail(novoEmail);
+    };
+
+    return (
+        <>
+            <Navbar />
+            <main className="container">
+                <div className="overlay" style={{ position: "relative", minHeight: "60vh", background: "none" }}>
+                    <div className="modal" style={{ position: "relative", top: 0, left: 0, transform: "none", margin: "0 auto" }}>
                         <h2>Acessar o Sistema</h2>
 
                         <form onSubmit={handleSubmit} className="formulario-produto">
-
-                            <div className="detalhes-info"
-                                 style={{display: "flex", flexDirection: "column", gap: "15px", textAlign: "left"}}>
+                            <div className="detalhes-info" style={{ display: "flex", flexDirection: "column", gap: "15px", textAlign: "left" }}>
                                 <div>
-                                    <label htmlFor="email"
-                                           style={{fontWeight: "bold", display: "block", marginBottom: "5px"}}>
+                                    <label htmlFor="email" style={{ fontWeight: "bold", display: "block", marginBottom: "5px" }}>
                                         E-mail:
                                     </label>
                                     <input
@@ -53,17 +101,12 @@ const Login = () => {
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder="seu-email@restaurante.com"
                                         required
-                                        style={{
-                                            width: "100%",
-                                            padding: "8px",
-                                            borderRadius: "4px",
-                                            border: "1px solid #ccc"
-                                        }}/>
+                                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+                                    />
                                 </div>
 
                                 <div>
-                                    <label htmlFor="senha"
-                                           style={{fontWeight: "bold", display: "block", marginBottom: "5px"}}>
+                                    <label htmlFor="senha" style={{ fontWeight: "bold", display: "block", marginBottom: "5px" }}>
                                         Senha:
                                     </label>
                                     <input
@@ -73,36 +116,108 @@ const Login = () => {
                                         onChange={(e) => setSenha(e.target.value)}
                                         placeholder="Sua senha"
                                         required
-                                        style={{
-                                            width: "100%",
-                                            padding: "8px",
-                                            borderRadius: "4px",
-                                            border: "1px solid #ccc"
-                                        }}/>
+                                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+                                    />
                                 </div>
                             </div>
 
-                            <div className="botoes-alerta" style={{marginTop: "25px"}}>
-                                <button
-                                    type="submit"
-                                    className="btn-confirmar-delete"
-                                    style={{backgroundColor: "#2ec4b6"}}
-                                    disabled={isPending}
-                                >
-                                    {isPending ? "Entrando..." : "Entrar"}
+                            <div className="botoes-alerta" style={{ marginTop: "25px" }}>
+                                <button type="submit" className="btn-confirmar-delete" style={{ backgroundColor: "#2ec4b6" }}>
+                                    Entrar
                                 </button>
-                                <button
-                                    type="button"
-                                    className="btn-cancelar"
-                                    onClick={() => navigate("/")}
-                                >
+                                <button type="button" className="btn-cancelar" onClick={() => navigate("/")}>
                                     Voltar para o Menu
                                 </button>
                             </div>
                         </form>
 
+                        {/* Link para abrir o Modal de Cadastro */}
+                        <div style={{ marginTop: "20px", fontSize: "14px" }}>
+                            Não tem uma conta?{" "}
+                            <button
+                                type="button"
+                                onClick={() => setIsModalAberto(true)}
+                                style={{ background: "none", border: "none", color: "#2ec4b6", cursor: "pointer", fontWeight: "bold", textDecoration: "underline" }}
+                            >
+                                Cadastre-se aqui
+                            </button>
+                        </div>
                     </div>
                 </div>
+
+                {/* --- MODAL DE CADASTRO --- */}
+                {isModalAberto && (
+                    <div className="overlay" style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(0,0,0,0.5)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
+                        <div className="modal" style={{ background: "white", padding: "30px", borderRadius: "8px", width: "90%", maxWidth: "450px", textAlign: "left" }}>
+                            <h2>Criar Nova Conta</h2>
+                            <form onSubmit={handleCadastrarCliente} style={{ display: "flex", flexDirection: "column", gap: "15px", marginTop: "15px" }}>
+
+                                <div>
+                                    <label style={{ fontWeight: "bold", display: "block", marginBottom: "5px" }}>Nome:</label>
+                                    <input
+                                        type="text"
+                                        value={novoNome}
+                                        onChange={(e) => setNovoNome(e.target.value)}
+                                        placeholder="Seu nome completo"
+                                        required
+                                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+                                    />
+                                </div>
+
+                                <div>
+                                    <label style={{ fontWeight: "bold", display: "block", marginBottom: "5px" }}>E-mail:</label>
+                                    <input
+                                        type="email"
+                                        value={novoEmail}
+                                        onChange={(e) => setNovoEmail(e.target.value)}
+                                        placeholder="seu-email@exemplo.com"
+                                        required
+                                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+                                    />
+                                </div>
+
+                                {/* NOVO CAMPO: Endereço */}
+                                <div>
+                                    <label style={{ fontWeight: "bold", display: "block", marginBottom: "5px" }}>Endereço de Entrega:</label>
+                                    <input
+                                        type="text"
+                                        value={novoEndereco}
+                                        onChange={(e) => setNovoEndereco(e.target.value)}
+                                        placeholder="Rua, Número, Bairro"
+                                        required
+                                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+                                    />
+                                </div>
+
+                                {/* NOVO CAMPO: Preferência de Pagamento */}
+                                <div>
+                                    <label style={{ fontWeight: "bold", display: "block", marginBottom: "5px" }}>Preferência de Pagamento:</label>
+                                    <select
+                                        value={novaPreferencia}
+                                        onChange={(e) => setNovaPreferencia(e.target.value)}
+                                        required
+                                        style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc", background: "white" }}
+                                    >
+                                        <option value="">Selecione uma opção</option>
+                                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                        <option value="Cartão de Débito">Cartão de Débito</option>
+                                        <option value="Pix">Pix</option>
+                                        <option value="Dinheiro">Dinheiro</option>
+                                    </select>
+                                </div>
+
+                                <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+                                    <button type="submit" style={{ flex: 1, padding: "10px", backgroundColor: "#2ec4b6", color: "white", border: "none", borderRadius: "4px", cursor: "pointer", fontWeight: "bold" }}>
+                                        Cadastrar
+                                    </button>
+                                    <button type="button" onClick={() => setIsModalAberto(false)} style={{ flex: 1, padding: "10px", backgroundColor: "#6c757d", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}>
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                )}
             </main>
         </>
     );
