@@ -29,24 +29,42 @@ const Login = () => {
             return;
         }
 
-        // 1. Verifica se é Admin
-        if (email === "admin@email.com") {
-            localStorage.setItem("usuarioLogado", email);
+        // Login do administrador
+        if (
+            email.toLowerCase() === "admin@email.com" &&
+            senha === "admin"
+        ) {
+            localStorage.setItem("tipoUsuario", "admin");
+            localStorage.setItem(
+                "usuario",
+                JSON.stringify({
+                    nome: "Administrador",
+                    email: "admin@email.com",
+                })
+            );
+
             alert("Bem-vindo, Administrador!");
             navigate("/");
             return;
         }
 
-        // 2. Valida se o e-mail existe na lista de clientes da API
-        const clienteExiste = clientes?.some((c) => c.email.toLowerCase() === email.toLowerCase());
+        // Procura o cliente pelo e-mail
+        const cliente = clientes?.find(
+            (c) => c.email.toLowerCase() === email.toLowerCase()
+        );
 
-        if (clienteExiste) {
-            localStorage.setItem("usuarioLogado", email);
-            alert(`Bem-vindo!`);
-            navigate("/pedidos");
-        } else {
-            alert("E-mail não encontrado. Por favor, cadastre-se primeiro!");
+        if (!cliente) {
+            alert("E-mail não encontrado. Cadastre-se primeiro!");
+            return;
         }
+
+        // Salva todas as informações do cliente
+        localStorage.setItem("tipoUsuario", "cliente");
+        localStorage.setItem("usuario", JSON.stringify(cliente));
+
+        alert(`Bem-vindo, ${cliente.nome}!`);
+
+        navigate("/pedidos");
     };
 
     // Lógica de Cadastro dentro do Modal
@@ -71,13 +89,17 @@ const Login = () => {
 
         alert("Cadastro realizado com sucesso!");
 
-        // Limpa todos os campos e fecha
         setNovoNome("");
         setNovoEmail("");
         setNovoEndereco("");
         setNovaPreferencia("");
-        setIsModalAberto(false);
+
         setEmail(novoEmail);
+        setSenha("");
+
+        setIsModalAberto(false);
+
+        alert("Cadastro realizado com sucesso! Faça o login.");
     };
 
     return (
