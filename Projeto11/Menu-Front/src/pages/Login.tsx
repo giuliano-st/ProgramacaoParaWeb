@@ -98,8 +98,6 @@ const Login = () => {
         setSenha("");
 
         setIsModalAberto(false);
-
-        alert("Cadastro realizado com sucesso! Faça o login.");
     };
 
     return (
