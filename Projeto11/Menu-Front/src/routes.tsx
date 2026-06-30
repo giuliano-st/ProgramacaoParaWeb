@@ -4,12 +4,15 @@ import Login from "./pages/Login";
 import Pedidos from "./pages/Pedidos";
 import Clientes from "./pages/Clientes.tsx";
 import {FormularioProduto} from "./componentes/FormularioProduto.tsx";
+import CardapioCliente from "./pages/CardapioCliente.tsx";
 
 const AppRoutes = () => {
 
     return (
         <Routes>
             <Route path="/" element={<Menu/>} />
+
+            <Route path="/cardapio" element={<CardapioCliente />} />
 
             <Route path="/login" element={<Login />} />
 
