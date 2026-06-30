@@ -1,13 +1,16 @@
-import { PainelLateralPedidos } from "../componentes/PainelLateralPedidos.tsx";
+import { PainelLateralPedidos } from "../componentes/layout/PainelLateralPedidos.tsx";
 import {useProdutoDados} from "../hooks/useProdutoDados.ts";
 import {useState} from "react";
 import type {ProdutoDados} from "../interfaces/ProdutoDados.ts";
 import {useProdutoDeletar} from "../hooks/useProdutoDeletar.ts";
 import {useProdutoAtualizar} from "../hooks/useProdutoEditar.ts";
-import {Navbar} from "../componentes/Navbar.tsx";
-import {FormularioProduto} from "../componentes/FormularioProduto.tsx";
+import {Navbar} from "../componentes/layout/Navbar.tsx";
 import {CartaoProduto} from "../componentes/CartaoProduto.tsx";
+import { ModalDetalhesProduto } from "../componentes/modais/ModalDetalhesProduto.tsx";
+import { ModalFormularioProduto} from "../componentes/modais/ModalFormularioProduto.tsx";
+import { ModalConfirmacao } from "../componentes/modais/ModalConfirmacao.tsx";
 import "./Menu.css";
+import {useProdutoMutate} from "../hooks/useProdutoMutate.ts";
 
 const Menu = () => {
     const { data } = useProdutoDados();
@@ -16,6 +19,7 @@ const Menu = () => {
 
     const [produtoSelecionado, setProdutoSelecionado] = useState<ProdutoDados | null>(null);
 
+    const { mutate: cadastrarProduto } = useProdutoMutate();
     const { mutate: deletarProduto, isPending: isDeletando } = useProdutoDeletar();
     const { mutate: editarProduto } = useProdutoAtualizar();
 
@@ -89,6 +93,17 @@ const Menu = () => {
         }
     }
 
+    const handleCadastro = (produto: ProdutoDados) => {
+        cadastrarProduto(produto, {
+            onSuccess: () => {
+                fecharModal();
+            },
+            onError: () => {
+                alert("Erro ao cadastrar o produto.");
+            }
+        });
+    };
+
     return (
         <>
             <Navbar/>
@@ -102,54 +117,36 @@ const Menu = () => {
                         <div className="modal">
                             <button className="fechar" onClick={fecharModal}>X</button>
 
-                            {tipoAcao === "cadastrar" && (
-                                <>
-                                    <h2>Cadastrar Novo Produto</h2>
-                                    <FormularioProduto />
-                                </>
-                            )}
+                            <ModalFormularioProduto
+                                aberto={modalAberto && tipoAcao === "cadastrar"}
+                                titulo="Cadastrar Novo Produto"
+                                onFechar={fecharModal}
+                                onSubmit={handleCadastro}
+                            />
 
-                            {tipoAcao === "editar" && (
-                                <>
-                                    <h2>Editar: {produtoSelecionado?.nome}</h2>
-                                    <FormularioProduto produtoInicial={produtoSelecionado}
-                                                       onSubmit={handleEditar}
-                                    />
-                                </>
-                            )}
+                            <ModalFormularioProduto
+                                aberto={modalAberto && tipoAcao === "editar"}
+                                titulo={`Editar: ${produtoSelecionado?.nome}`}
+                                produto={produtoSelecionado}
+                                onFechar={fecharModal}
+                                onSubmit={handleEditar}
+                            />
 
-                            {tipoAcao === "detalhes" && produtoSelecionado && (
-                                <div className="modal-detalhes">
-                                    <h2>Detalhes do Produto</h2>
+                            <ModalDetalhesProduto
+                                aberto={modalAberto && tipoAcao === "detalhes"}
+                                produto={produtoSelecionado}
+                                onFechar={fecharModal}
+                            />
 
-                                    <div className="detalhes-imagem-container">
-                                        <img src={produtoSelecionado.imagem} alt={produtoSelecionado.nome} />
-                                    </div>
-
-                                    <div className="detalhes-info">
-                                        <p><strong>Nome:</strong> {produtoSelecionado.nome}</p>
-                                        <p><strong>Descrição:</strong> {produtoSelecionado.descricao}</p>
-                                        <p><strong>Categoria:</strong> {produtoSelecionado.categoria}</p>
-                                        <p><strong>Preço:</strong> R$ {produtoSelecionado.preco.toFixed(2)}</p>
-                                        <p><strong>Status:</strong> {produtoSelecionado.disponibilidade ? "Disponível" : "Indisponível"}</p>
-                                    </div>
-
-                                    <button className="btn-cancelar" onClick={fecharModal}>Fechar</button>
-                                </div>
-                            )}
-
-                            {tipoAcao === "deletar" && (
-                                <div className="modal-deletar">
-                                    <h2>Excluir Produto</h2>
-                                    <p>Tem certeza que deseja excluir o produto <strong>{produtoSelecionado?.nome}</strong>?</p>
-                                    <div className="botoes-alerta">
-                                        <button className="btn-confirmar-delete" onClick={handleConfirmarDelecao} disabled={isDeletando}>
-                                            {isDeletando ? "Excluindo..." : "Sim, excluir"}
-                                        </button>
-                                        <button className="btn-cancelar" onClick={fecharModal}>Cancelar</button>
-                                    </div>
-                                </div>
-                            )}
+                            <ModalConfirmacao
+                                aberto={modalAberto && tipoAcao === "deletar"}
+                                titulo="Excluir Produto"
+                                mensagem={`Tem certeza que deseja excluir ${produtoSelecionado?.nome}?`}
+                                textoConfirmar="Sim, excluir"
+                                carregando={isDeletando}
+                                onConfirmar={handleConfirmarDelecao}
+                                onCancelar={fecharModal}
+                            />
                         </div>
                     </div>
                 )}

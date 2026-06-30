@@ -1,5 +1,5 @@
 import "./App.css";
-import AppFooter from "./componentes/Footer.tsx"
+import AppFooter from "./componentes/layout/Footer.tsx"
 
 import AppRoutes from "./routes";
 

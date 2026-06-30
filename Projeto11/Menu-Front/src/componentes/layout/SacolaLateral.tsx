@@ -1,5 +1,6 @@
-import type { ItemPedidoDados } from "../interfaces/ItemPedidoDados.ts";
-import { usePedidoMutate } from "../hooks/usePedidoMutate.ts";
+import type { ItemPedidoDados } from "../../interfaces/ItemPedidoDados.ts";
+import type { ClienteDados } from "../../interfaces/ClienteDados.ts";
+import { usePedidoMutate } from "../../hooks/usePedidoMutate.ts";
 import { useNavigate } from "react-router-dom";
 
 interface SacolaLateralProps {
@@ -11,18 +12,15 @@ export const SacolaLateral = ({ sacola, setSacola }: SacolaLateralProps) => {
     const { mutate: enviarPedido } = usePedidoMutate();
     const navigate = useNavigate();
 
-    // Recupera o cliente logado através do localStorage gerenciado no Login
-    const clienteLogadoRaw = localStorage.getItem("usuario");
-    const clienteLogado = clienteLogadoRaw ? JSON.parse(clienteLogadoRaw) : null;
+    const clienteLogado: ClienteDados | null =
+        JSON.parse(localStorage.getItem("usuario") || "null");
 
-    // Regra dos 10% que vimos no seu painel de administração
     const valorSubtotal = sacola.reduce((acc, item) => acc + (item.produtoId.preco * item.quantidade), 0);
     const taxaServico = valorSubtotal > 0 ? valorSubtotal * 0.10 : 0;
     const valorTotal = valorSubtotal + taxaServico;
 
     const alterarQuantidade = (produtoId: number, quantidadeNova: number) => {
         if (quantidadeNova <= 0) {
-            // Remove o item se a quantidade chegar a zero
             setSacola(atual => atual.filter(item => item.produtoId.id !== produtoId));
             return;
         }
@@ -35,23 +33,28 @@ export const SacolaLateral = ({ sacola, setSacola }: SacolaLateralProps) => {
         if (sacola.length === 0) return alert("Sua sacola está vazia!");
         if (!clienteLogado) return alert("Sessão expirada. Por favor, faça login novamente.");
 
-        // Estrutura mapeada exatamente para a sua entidade JPA 'Pedido' e 'ItemPedido'
         const novoPedido = {
-            clienteId: clienteLogado,
-            status: "Pendente",
+            clienteId: clienteLogado.id,
+
+            status: "PENDENTE",
+
             dataPedido: new Date().toISOString(),
-            valorTotal: valorTotal,
+
+            dataEntrega: null,
+
             itensPedido: sacola.map(item => ({
-                produtoId: { id: item.produtoId.id }, // Passa o ID para associação do Hibernate
+                pedidoId: null,
+                produtoId: item.produtoId.id,
                 quantidade: item.quantidade
             }))
         };
 
+        // @ts-ignore
         enviarPedido(novoPedido, {
             onSuccess: () => {
                 alert("Pedido enviado para a cozinha com sucesso!");
-                setSacola([]); // Limpa os itens
-                navigate("/pedidos"); // Leva o cliente à listagem de acompanhamento dele
+                setSacola([]);
+                navigate("/meus-pedidos");
             },
             onError: () => {
                 alert("Erro ao processar o pedido. Tente novamente.");

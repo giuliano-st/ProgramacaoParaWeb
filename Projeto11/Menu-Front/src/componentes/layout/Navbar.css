@@ -48,3 +48,28 @@
 
 .btn-cadastrar { border-color: #4caf50; color: #4caf50; }
 .btn-cadastrar:hover { background-color: #4caf50; color: white; }
+
+.navbar-links a{
+    text-decoration: none;
+}
+
+.navbar-usuario{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+}
+
+.navbar-usuario span{
+    font-weight:500;
+    color:#ddd;
+}
+
+.btn-sair{
+    border:1px solid #f44336;
+    color:#f44336;
+}
+
+.btn-sair:hover{
+    background:#f44336;
+    color:white;
+}

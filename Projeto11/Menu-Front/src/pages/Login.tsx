@@ -2,25 +2,22 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useClienteDados } from "../hooks/useClienteDados";
 import { useClienteMutate } from "../hooks/useClienteMutate";
-import { Navbar } from "../componentes/Navbar.tsx";
+import { Navbar } from "../componentes/layout/Navbar.tsx";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
-    // Estados para o Modal de Cadastro
     const [isModalAberto, setIsModalAberto] = useState(false);
     const [novoNome, setNovoNome] = useState("");
     const [novoEmail, setNovoEmail] = useState("");
     const [novoEndereco, setNovoEndereco] = useState("");
     const [novaPreferencia, setNovaPreferencia] = useState("");
 
-    // Puxando os dados e a função de criar do seu hook
     const { data: clientes } = useClienteDados();
     const { mutate: salvarCliente } = useClienteMutate();
     const navigate = useNavigate();
 
-    // Lógica de Login (Validando por E-mail)
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -29,7 +26,6 @@ const Login = () => {
             return;
         }
 
-        // Login do administrador
         if (
             email.toLowerCase() === "admin@email.com" &&
             senha === "admin"
@@ -44,11 +40,10 @@ const Login = () => {
             );
 
             alert("Bem-vindo, Administrador!");
-            navigate("/");
+            navigate("/menu");
             return;
         }
 
-        // Procura o cliente pelo e-mail
         const cliente = clientes?.find(
             (c) => c.email.toLowerCase() === email.toLowerCase()
         );
@@ -58,20 +53,17 @@ const Login = () => {
             return;
         }
 
-        // Salva todas as informações do cliente
         localStorage.setItem("tipoUsuario", "cliente");
         localStorage.setItem("usuario", JSON.stringify(cliente));
 
         alert(`Bem-vindo, ${cliente.nome}!`);
 
-        navigate("/pedidos");
+        navigate("/cardapio");
     };
 
-    // Lógica de Cadastro dentro do Modal
     const handleCadastrarCliente = (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Validação básica para garantir que tudo foi preenchido
         if (!novoNome || !novoEmail || !novoEndereco || !novaPreferencia) {
             return alert("Por favor, preencha todos os campos!");
         }
@@ -79,12 +71,11 @@ const Login = () => {
         const jaExiste = clientes?.some((c) => c.email.toLowerCase() === novoEmail.toLowerCase());
         if (jaExiste) return alert("Este e-mail já está cadastrado!");
 
-        // Enviando o objeto completo para o seu mutate
         salvarCliente({
             nome: novoNome,
             email: novoEmail,
             enderecoEntrega: novoEndereco,
-            preferenciaPagamento: novaPreferencia // Atenção ao nome exato da sua ‘interface’
+            preferenciaPagamento: novaPreferencia
         });
 
         alert("Cadastro realizado com sucesso!");
@@ -165,7 +156,6 @@ const Login = () => {
                     </div>
                 </div>
 
-                {/* --- MODAL DE CADASTRO --- */}
                 {isModalAberto && (
                     <div className="overlay" style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(0,0,0,0.5)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
                         <div className="modal" style={{ background: "white", padding: "30px", borderRadius: "8px", width: "90%", maxWidth: "450px", textAlign: "left" }}>
@@ -196,7 +186,6 @@ const Login = () => {
                                     />
                                 </div>
 
-                                {/* NOVO CAMPO: Endereço */}
                                 <div>
                                     <label style={{ fontWeight: "bold", display: "block", marginBottom: "5px" }}>Endereço de Entrega:</label>
                                     <input
@@ -209,7 +198,6 @@ const Login = () => {
                                     />
                                 </div>
 
-                                {/* NOVO CAMPO: Preferência de Pagamento */}
                                 <div>
                                     <label style={{ fontWeight: "bold", display: "block", marginBottom: "5px" }}>Preferência de Pagamento:</label>
                                     <select

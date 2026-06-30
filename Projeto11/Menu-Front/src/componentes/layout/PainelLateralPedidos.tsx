@@ -1,4 +1,4 @@
-import { usePedidoDados } from "../hooks/usePedidoDados.ts";
+import { usePedidoDados } from "../../hooks/usePedidoDados.ts";
 import "./PainelLateralPedidos.css";
 import {useNavigate} from "react-router-dom";
 

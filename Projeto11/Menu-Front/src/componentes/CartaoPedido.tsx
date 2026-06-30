@@ -3,10 +3,13 @@ import "./cartaoPedido.css";
 
 interface CartaoPedidoProps {
     pedido: PedidoDados;
-    onVerDetalhes: () => void;
-    onEditar: () => void;
-    onDeletar: () => void;
-    onMudarStatus: (novoStatus: string) => void;
+
+    onVerDetalhes?: () => void;
+    onEditar?: () => void;
+    onDeletar?: () => void;
+    onMudarStatus?: (novoStatus: string) => void;
+
+    modoCliente?: boolean;
 }
 
 export function CartaoPedido({
@@ -14,7 +17,8 @@ export function CartaoPedido({
                                  onVerDetalhes,
                                  onEditar,
                                  onDeletar,
-                                 onMudarStatus
+                                 onMudarStatus,
+                                 modoCliente = false
                              }: CartaoPedidoProps) {
 
     const obterClasseStatus = (status: string) => {
@@ -55,8 +59,7 @@ export function CartaoPedido({
                         <li key={index} className="recibo-item">
                             <span className="item-nome">{item.produtoId.nome}</span>
                             <span className="item-valores">
-                                {item.quantidade} x R$ {item.produtoId.preco}
-                                {/*{item.quantidade} x R$ {item.produtoId.preco.toFixed(2)}*/}
+                                {item.quantidade} x R$ {item.produtoId.preco.toFixed(2)}
                             </span>
                         </li>
                     ))}
@@ -66,34 +69,84 @@ export function CartaoPedido({
 
                 <div className="recibo-total">
                     <span>TOTAL (c/ 10% Garçom):</span>
-                    <strong>R$ {pedido.valorTotal}</strong>
-                    {/*<strong>R$ {pedido.valorTotal.toFixed(2)}</strong>*/}
+                    <strong>R$ {pedido.valorTotal?.toFixed(2)}</strong>
                 </div>
             </div>
 
             <div className="recibo-linhas-decorativas"></div>
 
-            <div className="recibo-acoes">
-                <div className="grupo-botoes-status">
-                    <select
-                        value={pedido.status}
-                        onChange={(e) => onMudarStatus(e.target.value)}
-                        className="select-status-rapido"
-                    >
-                        <option value="PENDENTE">Pendente</option>
-                        <option value="PREPARANDO">Preparando</option>
-                        <option value="PRONTO">Pronto</option>
-                        <option value="ENTREGUE">Entregue</option>
-                        <option value="CANCELADO">Cancelado</option>
-                    </select>
-                </div>
+            {!modoCliente && (
+                <div className="recibo-acoes">
 
-                <div className="grupo-botoes-crud">
-                    <button className="btn-recibo btn-detalhes" onClick={onVerDetalhes} title="Ver Detalhes">👁️</button>
-                    <button className="btn-recibo btn-editar" onClick={onEditar} title="Editar Pedido">✏️</button>
-                    <button className="btn-recibo btn-deletar" onClick={onDeletar} title="Excluir/Cancelar">🗑️</button>
+                    <div className="grupo-botoes-status">
+
+                        <select
+                            value={pedido.status}
+                            onChange={(e) =>
+                                onMudarStatus?.(e.target.value)
+                            }
+                            className="select-status-rapido"
+                        >
+                            <option value="PENDENTE">Pendente</option>
+                            <option value="PREPARANDO">Preparando</option>
+                            <option value="PRONTO">Pronto</option>
+                            <option value="ENTREGUE">Entregue</option>
+                            <option value="CANCELADO">Cancelado</option>
+                        </select>
+
+                    </div>
+
+                    <div className="grupo-botoes-crud">
+
+                        <button
+                            className="btn-recibo btn-detalhes"
+                            onClick={onVerDetalhes}
+                        >
+                            👁️
+                        </button>
+
+                        <button
+                            className="btn-recibo btn-editar"
+                            onClick={onEditar}
+                        >
+                            ✏️
+                        </button>
+
+                        <button
+                            className="btn-recibo btn-deletar"
+                            onClick={onDeletar}
+                        >
+                            🗑️
+                        </button>
+
+                    </div>
+
                 </div>
-            </div>
+            )}
+            {modoCliente && pedido.dataEntrega && (
+                <div
+                    style={{
+                        marginTop: "15px",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                        color: "#2ec4b6"
+                    }}
+                >
+                    Entregue em{" "}
+                    {new Date(pedido.dataEntrega).toLocaleString("pt-BR")}
+                </div>
+            )}
+            {modoCliente && !pedido.dataEntrega && (
+                <div
+                    className={`recibo-status ${obterClasseStatus(pedido.status)}`}
+                    style={{
+                        marginTop: "15px",
+                        textAlign: "center"
+                    }}
+                >
+                    Status atual: {pedido.status}
+                </div>
+            )}
         </div>
     );
 }

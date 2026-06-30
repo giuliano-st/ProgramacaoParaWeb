@@ -104,6 +104,8 @@ export function FormularioProduto({ produtoInicial, onSubmit }: FormularioProps)
                     type="checkbox"
                     id="disponivel"
                     name="disponivel"
+                    checked={disponibilidade}
+                    onChange={(e) => setDisponibilidade(e.target.checked)}
                 />
                 <label htmlFor="disponivel">Disponível no cardápio</label>
             </div>

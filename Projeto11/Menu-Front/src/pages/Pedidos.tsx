@@ -3,10 +3,11 @@ import { usePedidoDados } from "../hooks/usePedidoDados.ts";
 import type { PedidoDados } from "../interfaces/PedidoDados.ts";
 import { usePedidoDeletar } from "../hooks/usePedidoDeletar.ts";
 import { usePedidoAtualizar } from "../hooks/usePedidoEditar.ts";
-import { Navbar } from "../componentes/Navbar.tsx";
+import { Navbar } from "../componentes/layout/Navbar.tsx";
 import { FormularioPedido } from "../componentes/FormularioPedido.tsx";
 import { CartaoPedido } from "../componentes/CartaoPedido.tsx";
 import { useNavigate } from "react-router-dom";
+import {ModalEditarPedido} from "../componentes/ModalEditarPedido.tsx";
 
 const Pedidos = () => {
     const { data } = usePedidoDados();
@@ -14,7 +15,8 @@ const Pedidos = () => {
     const [tipoAcao, setTipoAcao] = useState<"cadastrar" | "editar" | "deletar" | "detalhes" | null>(null);
     const navigate = useNavigate();
 
-    const [pedidoSelecionado, setPedidoSelecionado] = useState<PedidoDados | null>(null);
+    const [pedidoSelecionado, setPedidoSelecionado] =
+        useState<PedidoDados | null>(null);
 
     const { mutate: deletarPedido, isPending: isDeletando } = usePedidoDeletar();
     const { mutate: editarPedido } = usePedidoAtualizar();
@@ -105,9 +107,17 @@ const Pedidos = () => {
                             {tipoAcao === "editar" && (
                                 <>
                                     <h2>Editar Pedido #{pedidoSelecionado?.id}</h2>
-                                    <FormularioPedido
-                                        pedidoInicial={pedidoSelecionado}
-                                        onSubmit={handleEditar}
+                                    <ModalEditarPedido
+                                        pedido={pedidoSelecionado}
+                                        status={pedidoSelecionado.status}
+                                        setStatus={(novoStatus) =>
+                                            setPedidoSelecionado({
+                                                ...pedidoSelecionado,
+                                                status: novoStatus
+                                            })
+                                        }
+                                        onSalvar={() => handleEditar(pedidoSelecionado)}
+                                        onCancelar={fecharModal}
                                     />
                                 </>
                             )}

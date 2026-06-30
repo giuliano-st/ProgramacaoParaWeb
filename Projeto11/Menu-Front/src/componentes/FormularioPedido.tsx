@@ -99,21 +99,38 @@ export function FormularioPedido({ pedidoInicial, onSubmit }: FormularioProps) {
         <form className="formulario" onSubmit={enviarFormulario}>
             <h2>{pedidoInicial ? `Editar Pedido #${pedidoInicial.id}` : "Novo Pedido"}</h2>
 
-            <div className="grupo-input">
-                <input
-                    type="number"
-                    placeholder="ID do Cliente"
-                    value={clienteId || ""}
-                    onChange={(e) => setClienteId(Number(e.target.value))}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Nome do Cliente (Opcional)"
-                    value={clienteNome}
-                    onChange={(e) => setClienteNome(e.target.value)}
-                />
-            </div>
+            {!pedidoInicial ? (
+
+                <div className="grupo-input">
+
+                    <input
+                        type="number"
+                        placeholder="ID do Cliente"
+                        value={clienteId || ""}
+                        onChange={(e) => setClienteId(Number(e.target.value))}
+                        required
+                    />
+
+                    <input
+                        type="text"
+                        placeholder="Nome do Cliente"
+                        value={clienteNome}
+                        onChange={(e) => setClienteNome(e.target.value)}
+                    />
+
+                </div>
+
+            ) : (
+
+                <div className="pedido-info">
+
+                    <strong>Cliente</strong>
+
+                    <span>{clienteNome}</span>
+
+                </div>
+
+            )}
 
             <select value={status} onChange={(e) => setStatus(e.target.value)}>
                 <option value="PENDENTE">Pendente</option>

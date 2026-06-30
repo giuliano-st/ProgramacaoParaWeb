@@ -11,6 +11,7 @@ import com.herysson.menubackend.repository.PedidoRepository;
 import com.herysson.menubackend.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +55,16 @@ public class PedidoService {
         pedido.setValorTotal(valorTotalComGarcom);
         pedido.setStatus(pedidoDTO.status());
         pedido.setDataPedido(pedidoDTO.dataPedido());
-        pedido.setDataEntrega(pedidoDTO.dataEntrega());
+        if ("ENTREGUE".equalsIgnoreCase(pedidoDTO.status())
+                && pedido.getDataEntrega() == null) {
+
+            pedido.setDataEntrega(LocalDateTime.now());
+
+        } else if (!"ENTREGUE".equalsIgnoreCase(pedidoDTO.status())) {
+
+            pedido.setDataEntrega(null);
+
+        }
         pedidoRepository.save(pedido);
         return new PedidoDTOResponse(pedido.getId(), pedido.getClienteId(), pedido.getItensPedido(), pedido.getValorTotal(), pedido.getStatus(), pedido.getDataPedido(), pedido.getDataEntrega());
     }
@@ -67,6 +77,25 @@ public class PedidoService {
     public List<PedidoDTOResponse> listar(){
         List<Pedido> pedidos = pedidoRepository.findAll();
         return pedidos.stream().map(pedido -> new PedidoDTOResponse(pedido.getId(), pedido.getClienteId(), pedido.getItensPedido(), pedido.getValorTotal(), pedido.getStatus(), pedido.getDataPedido(), pedido.getDataEntrega())).toList();
+    }
+
+    public List<PedidoDTOResponse> listarPorCliente(Long clienteId){
+
+        List<Pedido> pedidos =
+                pedidoRepository.findByClienteIdId(clienteId);
+
+        return pedidos.stream()
+                .map(pedido -> new PedidoDTOResponse(
+                        pedido.getId(),
+                        pedido.getClienteId(),
+                        pedido.getItensPedido(),
+                        pedido.getValorTotal(),
+                        pedido.getStatus(),
+                        pedido.getDataPedido(),
+                        pedido.getDataEntrega()
+                ))
+                .toList();
+
     }
 
     public PedidoDTOResponse atualizar(Long id, PedidoDTORequest pedidoDTO){
@@ -99,7 +128,16 @@ public class PedidoService {
         pedido.setValorTotal(valorTotalComGarcom);
         pedido.setStatus(pedidoDTO.status());
         pedido.setDataPedido(pedidoDTO.dataPedido());
-        pedido.setDataEntrega(pedidoDTO.dataEntrega());
+        if ("ENTREGUE".equalsIgnoreCase(pedidoDTO.status())
+                && pedido.getDataEntrega() == null) {
+
+            pedido.setDataEntrega(LocalDateTime.now());
+
+        } else if (!"ENTREGUE".equalsIgnoreCase(pedidoDTO.status())) {
+
+            pedido.setDataEntrega(null);
+
+        }
 
         pedido.getItensPedido().clear();
         pedido.getItensPedido().addAll(novosItens);
